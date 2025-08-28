@@ -3,13 +3,13 @@ GREEN  = \033[0;32m
 YELLOW = \033[0;33m
 RST = \033[0m
 
-CC = clang++
+CC = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 # In a Makefile, both CFLAGS and CXXFLAGS are variables used to specify compiler options, but they apply to different languages:
 # CFLAGS = C
 # CXXFLAGS = C++
 
-NAME = megaphone
+NAME = phonebook
 SRC = megaphone.cpp
 OBJ = $(SRC:.cpp=.o)
 
