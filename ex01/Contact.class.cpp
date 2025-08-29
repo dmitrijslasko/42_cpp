@@ -18,7 +18,7 @@ Contact::Contact(
 		this->_lastName = lastName;
 		this->_nickname = nickname;
 		this->_phoneNumber = phoneNumber;
-		this->_darkestSecret = firstName;
+		this->_darkestSecret = darkestSecret;
 	if (SHOW_DEBUG)
 		std::cout << "Contact.class parameterized constructor called" << std::endl;
 }

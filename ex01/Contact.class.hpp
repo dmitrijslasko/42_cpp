@@ -20,7 +20,7 @@ class Contact {
 		std::string getDarkestSecret(void);
 
 	private:
-		int			_index;
+		// int			_index;
 		std::string _firstName;
 		std::string	_lastName;
 		std::string _nickname;

@@ -18,27 +18,31 @@ all: $(NAME)
 # Function for status messages
 define status
 	@echo "--------------------------------------------------------------------"
-	@echo "${GREEN}>>>$(1) ${RST}"
+	@echo "$(2)>>>$(1) ${RST}"
 	@echo "--------------------------------------------------------------------"
 endef
 
 # Linking
 $(NAME): $(OBJ)
-	$(call status, Linking object files...)
+	$(call status, 🟢 Linking object files..., $(GREEN))
 	$(CC) $(CXXFLAGS) $(OBJ) -o $(NAME)
+	@echo ""
 
 # Compilation
 %.o: %.cpp
-	$(call status, Compiling object files $< ...)
+	$(call status, 🟢 Compiling object file $< ..., $(GREEN))
 	$(CC) $(CXXFLAGS) -c $< -o $@
+	@echo ""
 
 clean:
-	$(call status, Performing clean - deleting object files...)
+	$(call status, 🟡 Performing clean - deleting object files..., $(YELLOW))
 	rm -f $(OBJ)
+	@echo ""
 
 fclean: clean
-	$(call status, Performing full clean – deleting binaries and object files...)
+	$(call status, 🟡 Performing full clean – deleting binaries and object files..., $(YELLOW))
 	rm -f $(NAME)
+	@echo ""
 
 re: fclean all
 

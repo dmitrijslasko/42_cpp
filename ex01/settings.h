@@ -14,13 +14,13 @@
 # define	MAX_CONTACTS	3
 
 // line break settings
-# define	LINE_BREAK_LEN	65
-# define	LINE_BREAK_CHAR '-'
-# define	LINE_BREAK_COLOR CYAN
+# define	LINE_BREAK_LEN		65
+# define	LINE_BREAK_CHAR 	'-'
+# define	LINE_BREAK_COLOR 	CYAN
 
-# define	DISPLAY_FIELD_WIDTH	10
-# define	SEP_CHAR		'|'
-# define	SEP_CLR			GREY
+# define	DISPLAY_FIELD_WIDTH		10
+# define	SEP_CHAR				'|'
+# define	SEP_CLR					GREY
 
 // terminal Colors (ANSI Escape Codes)
 # define	BLACK			"\033[30m"
