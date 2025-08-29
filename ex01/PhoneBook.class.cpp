@@ -48,6 +48,7 @@ void PhoneBook::add(void) {
 	std::cout << printColor("✅ Contact added to the phonebook!", B_GREEN);
 	std::cout << std::endl;
 	printLineBreaks(1, GREEN);
+	std::cout << std::endl;
 
 	if (PhoneBook::_contactsCount < MAX_CONTACTS)
 		PhoneBook::_contactsCount++;
@@ -82,21 +83,19 @@ bool isNumber(const std::string &str) {
 	return (true);
 }
 
-
-void PhoneBook::search(void) {
-	if (SHOW_DEBUG)
-		std::cout << "PhoneBook.class search method" << std::endl;
+int	PhoneBook::printOutPhonebook(void) {
 
 	if (PhoneBook::_contactsCount == 0)
 	{
-		std::cout << "❌ Phonebook is empty, nothing to show!" << std::endl;
-		return ;
+		std::cout << printColor("❌ Phonebook is empty, nothing to show!", B_RED) << std::endl;
+		std::cout << std::endl;
+		return 1;
 	}
 
-	std::cout << std::endl;
 	printLineBreaks(1, RED);
 	printHeader();
 	printLineBreaks(1, SEP_CLR);
+
 	for (size_t i = 0; i < PhoneBook::_contactsCount; i++)
 	{
 		std::cout 	<< std::setw(DISPLAY_FIELD_WIDTH) << std::right << i + 1
@@ -109,34 +108,44 @@ void PhoneBook::search(void) {
 					<< SEP_CLR << SEP_CHAR << RESET
 					<< std::endl;
 	}
-	printLineBreaks(1, GREY);
-	
+	printLineBreaks(1, SEP_CLR);
+	return 0;
+}
+
+void PhoneBook::search(void) {
+	if (SHOW_DEBUG)
+		std::cout << "PhoneBook.class search method" << std::endl;
+
+	if (PhoneBook::printOutPhonebook())
+		return ;
+
 	std::string chosenIndex;
 	size_t index = 0;
 	while (index <= 0 || index >= PhoneBook::_contactsCount)
 	{
-		chosenIndex = promptInput(printColor("Choose index to display contact information > ", CYAN));
+		chosenIndex = promptInput(printColor("Choose an index to display contact info > ", B_YELLOW));
 		if (!isNumber(chosenIndex))
 		{
-			std::cout << B_RED << "❌ Not a proper number. Try again!" << RESET << std::endl;
+			std::cout << B_RED << "❌ Not a valid index. Try again!\n" << RESET << std::endl;
 			continue ;
 		}
 		index = std::stoi(chosenIndex) - 1;
 		if (index >= 0 && index < PhoneBook::_contactsCount)
 			break ;
-		std::cout << B_RED << "❌ Index out of range!" << RESET << std::endl;
+		std::cout << B_RED << "❌ Index out of range!\n" << RESET << std::endl;
 	}
 
 	std::cout << std::endl;
+	printLineBreaks(1, GREEN);
+	std::cout << printColor("👍 Here is your contact info: ", B_GREEN) << std::endl;
+	printLineBreaks(1, GREEN);
+	std::cout << std::setw(20) << std::left << PROMPT_FIRST_NAME << PhoneBook::_contacts[index].getFirstName() << std::endl;
+	std::cout << std::setw(20) << std::left << PROMPT_LAST_NAME << PhoneBook::_contacts[index].getLastName() << std::endl;
+	std::cout << std::setw(20) << std::left << PROMPT_NICKNAME << PhoneBook::_contacts[index].getNickname() << std::endl;
+	std::cout << std::setw(20) << std::left << PROMPT_PHONE_NUMBER << PhoneBook::_contacts[index].getPhoneNumber() << std::endl;
+	std::cout << std::setw(20) << std::left << PROMPT_DARKEST_SECRET << PhoneBook::_contacts[index].getDarkestSecret() << std::endl;
 	printLineBreaks(1, CYAN);
-	std::cout << "Here is your contact info: " << std::endl;
-	printLineBreaks(1, CYAN);
-	std::cout << std::setw(20) << std::left <<  "First name: " << PhoneBook::_contacts[index].getFirstName() << std::endl;
-	std::cout << std::setw(20) << std::left << "Last name: " << PhoneBook::_contacts[index].getLastName() << std::endl;
-	std::cout << std::setw(20) << std::left << "Nickname: " << PhoneBook::_contacts[index].getNickname() << std::endl;
-	std::cout << std::setw(20) << std::left << "Phone number: " << PhoneBook::_contacts[index].getPhoneNumber() << std::endl;
-	std::cout << std::setw(20) << std::left << "Darkest secret: " << PhoneBook::_contacts[index].getDarkestSecret() << std::endl;
-	printLineBreaks(1, CYAN);
+	std::cout << std::endl;
 }
 
 bool PhoneBook::quit(void) {
@@ -148,14 +157,25 @@ bool PhoneBook::quit(void) {
 	while (true) {
 		size_t contactsCount = PhoneBook::_contactsCount;
 		if (contactsCount > 0)
-			std::cout << contactsCount <<" contact(s) will get permanently lost.";
-		std::cout << " Are you sure? (Y/N): " << std::flush;
+			std::cout << contactsCount <<" contact(s) will get permanently lost. ";
+		std::cout << "Are you sure? (Y/N): " << std::flush;
 		std::getline(std::cin, resp);
 		if (resp == "Y")
+		{
+			std::cout << std::endl;
 			return true;
+		}
 		else if (resp == "N")
+		{
+			std::cout << std::endl;
 			return false;
+		}
+		else if (std::cin.eof())
+		{
+			std::cout << EOF_DETECTED_TEXT << std::endl;
+			exit(0);
+		}
 		else
-			std::cout << "Invalid input, please type Y or N." << std::endl;
+			std::cout << printColor("❌ Invalid input, please type Y or N.\n", B_RED) << std::endl;
 	}
 }

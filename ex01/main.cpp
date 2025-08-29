@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include <cctype>
 
 #include "Contact.class.hpp"
@@ -8,7 +9,10 @@
 
 std::string printColor(std::string str, std::string color);
 
+/* This function trims preceding and trailing spaces*/
 std::string trim(const std::string& str) {
+	if (str.size() == 0)
+		return str;
 
 	// trim preceding spaces
     std::string::const_iterator start = str.begin();
@@ -21,27 +25,36 @@ std::string trim(const std::string& str) {
 	while (end != start && std::isspace(*end))
         end--;
 
-    return std::string(start, end + 1);
+	if (start < end + 1)
+    	return std::string(start, end + 1);
+	return "";
 }
 
 std::string promptInput(const std::string& prompt) {
+	
+	const int PROMPT_WIDTH = 20;
     std::string input;
 
 	while (input.empty()) {
-		std::cout << prompt;
+		std::cout << std::left << std::setw(PROMPT_WIDTH) << prompt;
 		if (!std::getline(std::cin, input))
 		{
 			std::cin.clear();
 			std::cout << "\nEOF detected, quitting the phonebook..." << std::endl;
 			exit(0);
 		}
-        input = trim(input);
+		input = trim(input);
 		if (input.empty())
-			std::cout << printColor("Empty input not allowed! Input text to proceed.", B_RED) << std::endl;
+		{
+			std::cout << printColor("⚠️  Empty input not allowed! Input text to proceed.\n", B_RED) << std::endl;
+			continue ;
+		}
+		
     }
     return input;
 }
 
+/* Prints a line break of specified count and color*/
 void	printLineBreaks(const int count, const char *color)
 {
 	for (int i = 0; i < count; i++)
@@ -54,22 +67,32 @@ void	printLineBreaks(const int count, const char *color)
 	}
 }
 
+/* Prints color text. Resets the color option at the end*/
 std::string printColor(std::string str, std::string color)
 {
 	return color + str + RESET;
 }
 
+/* Prints color text. Does not reset the color option at the end*/
+std::string printColorNoReset(std::string str, std::string color)
+{
+	return color + str;
+}
+
+/* Prints out phonebook usage manual*/
 void	printInstructions(void)
 {
+	size_t	WIDTH = 20;
+
 	printLineBreaks(1, MAGENTA);
 	std::cout 	<< ASCII_LOGO;
 	
 	printLineBreaks(1, MAGENTA);
-	std::cout << printColor(LINE1_TEXT, LINE1_CLR) << RESET << std::endl;
-	std::cout << "👤 " << printColor(CMD1, CMD_CLR) << printColor(CMD1_PROMPT, CMD_PROMPT_CLR) << std::endl;
-	std::cout << "🔍 " << printColor(CMD2, CMD_CLR) << printColor(CMD2_PROMPT, CMD_PROMPT_CLR) << std::endl;
-	// std::cout << "🙏 " << printColor(CMD3, CMD_CLR) << printColor(CMD3_PROMPT, CMD_PROMPT_CLR) << std::endl;
-	std::cout << "🚪 " << printColor(CMD4, CMD_CLR) << printColor(CMD4_PROMPT, CMD_PROMPT_CLR) << std::endl;
+	std::cout 	<< printColor(LINE1_TEXT, LINE1_CLR) << RESET << std::endl
+				<< "👤 " << std::left << std::setw(WIDTH) << printColor(CMD1, CMD_CLR) << printColor(CMD1_PROMPT, CMD_PROMPT_CLR) << std::endl
+			 	<< "🔍 " << std::left << std::setw(WIDTH) << printColor(CMD2, CMD_CLR) << printColor(CMD2_PROMPT, CMD_PROMPT_CLR) << std::endl
+		 		// << "🙏 " << printColor(CMD3, CMD_CLR) << printColor(CMD3_PROMPT, CMD_PROMPT_CLR) << std::endl;
+				<< "🚪 " << std::left << std::setw(WIDTH) << printColor(CMD4, CMD_CLR) << printColor(CMD4_PROMPT, CMD_PROMPT_CLR) << std::endl;
 	printLineBreaks(1, LINE_BREAK_COLOR);
 }
 
@@ -84,18 +107,17 @@ int	main(void) {
 	while (true) {
 
 		// print prompt and take input
-		std::cout << printColor(PROMPT_TEXT, PROMPT_CLR);
+		std::cout << std::left << std::setw(25) << printColorNoReset(PROMPT_TEXT, PROMPT_CLR);
 		std::getline(std::cin, command);
-		
-		// std::cin >> command; does not work here because we need whole line not separate words
+		std::cout << RESET;
 
+		command = trim(command);
+		
 		// handle commands
 		if (command == CMD1)
 			phonebook.add();
 		else if (command == CMD2)
 			phonebook.search();
-		// else if (command == CMD3)
-		// 	printInstructions();
 		else if (command == CMD4)
 		{
 			if (phonebook.quit())
@@ -106,11 +128,14 @@ int	main(void) {
 		}
 		else if (std::cin.eof())
 		{
-			std::cout << "\nEOF detected, quitting the phonebook..." << std::endl;
+			std::cout << EOF_DETECTED_TEXT << std::endl;
 			return (0);
 		}
 		else
+		{
 			std::cout << printColor(BAD_PROMPT_TEXT, BAD_PROMPT_CLR) << std::endl;
+			std::cout << std::endl;
+		}
 	}
 	return 0;
 }

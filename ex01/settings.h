@@ -14,7 +14,7 @@
 # define	MAX_CONTACTS	3
 
 // line break settings
-# define	LINE_BREAK_LEN	80
+# define	LINE_BREAK_LEN	65
 # define	LINE_BREAK_CHAR '-'
 # define	LINE_BREAK_COLOR CYAN
 
@@ -33,7 +33,7 @@
 # define	CYAN			"\033[36m"
 # define	WHITE			"\033[37m"
 # define	B_BLACK			"\033[90m"
-# define	B_RED			"\033[91m"
+# define	B_RED			"\033[38;5;210m"
 # define	B_GREEN			"\033[92m"
 # define	B_YELLOW		"\033[93m"
 # define	B_BLUE			"\033[94m"
@@ -55,24 +55,26 @@
 // # define	CMD3 			"HELP"
 # define	CMD4 			"EXIT"
 
-# define	CMD1_PROMPT 	"\t\tadd a new contact"
-# define	CMD2_PROMPT 	"\tperform contact search"
+# define	CMD1_PROMPT 	"add a new contact"
+# define	CMD2_PROMPT 	"perform contact search"
 // # define	CMD3_PROMPT 	"\t\tprint available commands"
-# define	CMD4_PROMPT 	"\t\texit the phonebook"
+# define	CMD4_PROMPT 	"exit the phonebook"
 
 # define 	CMD_CLR			B_GREEN
 # define 	CMD_PROMPT_CLR	YELLOW
 
 // prompty
-# define	PROMPT_TEXT		"Enter a command >\t"
-# define	PROMPT_CLR		B_CYAN
+# define	PROMPT_TEXT		"Enter a command >"
+# define	PROMPT_CLR		B_YELLOW
 # define 	BAD_PROMPT_TEXT	"❌ I don't recognize this command..."
 # define 	BAD_PROMPT_CLR	B_RED
 
-# define PROMPT_FIRST_NAME		"Enter first name:\t"
-# define PROMPT_LAST_NAME		"Enter last name:\t"
-# define PROMPT_NICKNAME		"Enter nickname:\t\t"
-# define PROMPT_PHONE_NUMBER	"Enter phone number:\t"
-# define PROMPT_DARKEST_SECRET	"Enter darkest secret:\t"
+# define	EOF_DETECTED_TEXT	"\n\n >>> EOF detected, quitting the phonebook...\n"
+
+# define PROMPT_FIRST_NAME		"First name:"
+# define PROMPT_LAST_NAME		"Last name:"
+# define PROMPT_NICKNAME		"Nickname:"
+# define PROMPT_PHONE_NUMBER	"Phone number:"
+# define PROMPT_DARKEST_SECRET	"Darkest secret:"
 
 #endif
