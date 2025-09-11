@@ -1,6 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include <cctype>
+#include <cstdlib>
 
 #include "Contact.class.hpp"
 #include "PhoneBook.class.hpp"
@@ -32,7 +33,7 @@ std::string trim(const std::string& str) {
 }
 
 std::string promptInput(const std::string& prompt) {
-	
+
 	const int PROMPT_WIDTH = 20;
     std::string input;
 
@@ -50,7 +51,7 @@ std::string promptInput(const std::string& prompt) {
 			std::cout << printColor("⚠️  Empty input not allowed! Input text to proceed.\n", B_RED) << std::endl;
 			continue ;
 		}
-		
+
     }
     return input;
 }
@@ -87,7 +88,7 @@ void	printInstructions(void)
 
 	printLineBreaks(1, MAGENTA);
 	std::cout 	<< ASCII_LOGO;
-	
+
 	printLineBreaks(1, MAGENTA);
 	std::cout 	<< printColor(LINE1_TEXT, LINE1_CLR) << RESET << std::endl
 				<< "👤 " << std::left << std::setw(WIDTH) << printColor(CMD1, CMD_CLR) << printColor(CMD1_PROMPT, CMD_PROMPT_CLR) << std::endl
@@ -113,7 +114,7 @@ int	main(void) {
 		std::cout << RESET;
 
 		command = trim(command);
-		
+
 		// handle commands
 		if (command == CMD1)
 			phonebook.add();
