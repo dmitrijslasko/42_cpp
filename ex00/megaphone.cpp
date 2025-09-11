@@ -2,11 +2,13 @@
 #include <string>   // for std::string
 #include <cctype>   // for std::toupper
 
+#define PLACEHOLDER_TEXT "* LOUD AND UNBEARABLE FEEDBACK NOISE *"
+
 int main(int argc, char **argv) 
 {
 	if (argc == 1)
 	{
-		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
+		std::cout << PLACEHOLDER_TEXT << std::endl;
 		return 0;
 	}
 
@@ -17,6 +19,6 @@ int main(int argc, char **argv)
 		}
 		std::cout << s;
 	}
-	std::cout << '\n';
+	std::cout << std::endl;
 	return 0;
 }

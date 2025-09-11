@@ -12,7 +12,7 @@ class PhoneBook {
 		
 		void add(void);
 		void search(void);
-		bool quit(void);
+		bool exit(void);
 		int printOutPhonebook(void);
 
 		void pushContacts(void);

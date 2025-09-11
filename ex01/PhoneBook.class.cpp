@@ -148,7 +148,7 @@ void PhoneBook::search(void) {
 	std::cout << std::endl;
 }
 
-bool PhoneBook::quit(void) {
+bool PhoneBook::exit(void) {
 	if (SHOW_DEBUG)
 		std::cout << "PhoneBook.class search method" << std::endl;
 	
@@ -160,12 +160,12 @@ bool PhoneBook::quit(void) {
 			std::cout << contactsCount <<" contact(s) will get permanently lost. ";
 		std::cout << "Are you sure? (Y/N): " << std::flush;
 		std::getline(std::cin, resp);
-		if (resp == "Y")
+		if (resp == "Y" || resp == "y")
 		{
 			std::cout << std::endl;
 			return true;
 		}
-		else if (resp == "N")
+		else if (resp == "N" || resp == "n")
 		{
 			std::cout << std::endl;
 			return false;
@@ -173,7 +173,7 @@ bool PhoneBook::quit(void) {
 		else if (std::cin.eof())
 		{
 			std::cout << EOF_DETECTED_TEXT << std::endl;
-			exit(0);
+			exit();
 		}
 		else
 			std::cout << printColor("❌ Invalid input, please type Y or N.\n", B_RED) << std::endl;

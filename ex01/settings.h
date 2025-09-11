@@ -11,7 +11,7 @@
 
 # define	SHOW_DEBUG		0
 
-# define	MAX_CONTACTS	3
+# define	MAX_CONTACTS	8
 
 // line break settings
 # define	LINE_BREAK_LEN		65
@@ -64,17 +64,17 @@
 # define 	CMD_PROMPT_CLR	YELLOW
 
 // prompty
-# define	PROMPT_TEXT		"Enter a command >"
-# define	PROMPT_CLR		B_YELLOW
-# define 	BAD_PROMPT_TEXT	"❌ I don't recognize this command..."
-# define 	BAD_PROMPT_CLR	B_RED
+# define	PROMPT_TEXT				"Enter a command >"
+# define	PROMPT_CLR				B_YELLOW
+# define 	BAD_PROMPT_TEXT			"❌ I don't recognize this command..."
+# define 	BAD_PROMPT_CLR			B_RED
 
-# define	EOF_DETECTED_TEXT	"\n\n >>> EOF detected, quitting the phonebook...\n"
+# define	EOF_DETECTED_TEXT		"\n\n >>> EOF detected, quitting the phonebook...\n"
 
-# define PROMPT_FIRST_NAME		"First name:"
-# define PROMPT_LAST_NAME		"Last name:"
-# define PROMPT_NICKNAME		"Nickname:"
-# define PROMPT_PHONE_NUMBER	"Phone number:"
-# define PROMPT_DARKEST_SECRET	"Darkest secret:"
+# define 	PROMPT_FIRST_NAME		"First name:"
+# define 	PROMPT_LAST_NAME		"Last name:"
+# define 	PROMPT_NICKNAME			"Nickname:"
+# define 	PROMPT_PHONE_NUMBER		"Phone number:"
+# define 	PROMPT_DARKEST_SECRET	"Darkest secret:"
 
 #endif

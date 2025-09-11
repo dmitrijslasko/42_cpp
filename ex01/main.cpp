@@ -27,6 +27,7 @@ std::string trim(const std::string& str) {
 
 	if (start < end + 1)
     	return std::string(start, end + 1);
+
 	return "";
 }
 
@@ -101,7 +102,7 @@ int	main(void) {
 	PhoneBook 	phonebook;
 	std::string	command;
 
-	// print out instructions
+	// print out phonebook usage instructions
 	printInstructions();
 
 	while (true) {
@@ -120,7 +121,7 @@ int	main(void) {
 			phonebook.search();
 		else if (command == CMD4)
 		{
-			if (phonebook.quit())
+			if (phonebook.exit())
 			{
 				std::cout << printColor(EXIT_TEXT, EXIT_TEXT_CLR) << std::endl;
 				break ;
