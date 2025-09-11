@@ -134,10 +134,11 @@ int	main(void) {
 			return (0);
 		}
 		else
-		{
-			std::cout << printColor(BAD_PROMPT_TEXT, BAD_PROMPT_CLR) << std::endl;
-			std::cout << std::endl;
-		}
+			;
+		//{
+		//	std::cout << printColor(BAD_PROMPT_TEXT, BAD_PROMPT_CLR) << std::endl;
+		//	std::cout << std::endl;
+		//}
 	}
 	return 0;
 }

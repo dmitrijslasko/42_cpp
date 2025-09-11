@@ -1,7 +1,8 @@
 #include <iostream>
 #include <iomanip>
-
 #include <string>
+#include <cstdlib>
+
 #include "PhoneBook.class.hpp"
 #include "settings.h"
 #include "utilities.h"
@@ -18,14 +19,14 @@ PhoneBook::~PhoneBook(void) {
 		std::cout << "PhoneBook.class destructor called" << std::endl;
 }
 
-void PhoneBook::pushContacts(void)
+void PhoneBook::_pushContacts(void)
 {
 	int maxIndex = PhoneBook::_contactsCount;
 
 	if (maxIndex == MAX_CONTACTS)
 		maxIndex = MAX_CONTACTS - 1;
 	for (int i = maxIndex - 1; i >= 0; i--)
-		_contacts[i + 1] = _contacts[i]; 
+		_contacts[i + 1] = _contacts[i];
 }
 
 void PhoneBook::add(void) {
@@ -40,7 +41,7 @@ void PhoneBook::add(void) {
 
 	size_t index = 0;
 
-	pushContacts();
+	_pushContacts();
 	Contact new_contact(firstName, lastName, nickname, phoneNumber, darkestSecret);
 	this->_contacts[index] = new_contact;
 
@@ -83,7 +84,7 @@ bool isNumber(const std::string &str) {
 	return (true);
 }
 
-int	PhoneBook::printOutPhonebook(void) {
+int	PhoneBook::_printOutPhonebook(void) {
 
 	if (PhoneBook::_contactsCount == 0)
 	{
@@ -116,7 +117,7 @@ void PhoneBook::search(void) {
 	if (SHOW_DEBUG)
 		std::cout << "PhoneBook.class search method" << std::endl;
 
-	if (PhoneBook::printOutPhonebook())
+	if (PhoneBook::_printOutPhonebook())
 		return ;
 
 	std::string chosenIndex;
@@ -129,7 +130,8 @@ void PhoneBook::search(void) {
 			std::cout << B_RED << "❌ Not a valid index. Try again!\n" << RESET << std::endl;
 			continue ;
 		}
-		index = std::stoi(chosenIndex) - 1;
+
+		index = std::atoi(chosenIndex.c_str()) - 1;
 		if (index >= 0 && index < PhoneBook::_contactsCount)
 			break ;
 		std::cout << B_RED << "❌ Index out of range!\n" << RESET << std::endl;
@@ -151,7 +153,7 @@ void PhoneBook::search(void) {
 bool PhoneBook::exit(void) {
 	if (SHOW_DEBUG)
 		std::cout << "PhoneBook.class search method" << std::endl;
-	
+
 	std::string resp;
 
 	while (true) {
