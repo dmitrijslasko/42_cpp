@@ -66,6 +66,9 @@
 		"numbers": "cpp",
 		"ostream": "cpp",
 		"ranges": "cpp",
-		"span": "cpp"
+		"span": "cpp",
+		"charconv": "cpp",
+		"chrono": "cpp",
+		"format": "cpp"
 	}
 }

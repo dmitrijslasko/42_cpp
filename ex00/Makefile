@@ -5,6 +5,7 @@ RST = \033[0m
 
 CC = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+CXXFLAGS += -Wold-style-cast -Wdeprecated-declarations -Wpedantic
 # In a Makefile, both CFLAGS and CXXFLAGS are variables used to specify compiler options, but they apply to different languages:
 # CFLAGS = C
 # CXXFLAGS = C++

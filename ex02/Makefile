@@ -9,13 +9,12 @@ CXXFLAGS += -Wold-style-cast -Wdeprecated-declarations -Wpedantic
 
 NAME = phonebook
 
-SRC = main.cpp \
-      Contact.class.cpp \
-      PhoneBook.class.cpp
+SRC = tests.cpp \
+      Account.cpp \
 
 OBJ = $(SRC:.cpp=.o)
 
-HEADERS = Contact.class.hpp PhoneBook.class.hpp settings.h utilities.h
+HEADERS = Account.hpp
 
 all: $(NAME)
 
@@ -31,6 +30,7 @@ $(NAME): $(OBJ)
 	$(call status, 🟢 Linking object files..., $(GREEN))
 	$(CC) $(CXXFLAGS) $(OBJ) -o $(NAME)
 	@echo ""
+	./$(NAME) > log.log
 
 # Compilation
 %.o: %.cpp $(HEADERS)

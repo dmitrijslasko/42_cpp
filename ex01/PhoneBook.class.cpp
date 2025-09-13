@@ -132,7 +132,7 @@ void PhoneBook::search(void) {
 		}
 
 		index = std::atoi(chosenIndex.c_str()) - 1;
-		if (index >= 0 && index < PhoneBook::_contactsCount)
+		if (index < PhoneBook::_contactsCount)
 			break ;
 		std::cout << B_RED << "❌ Index out of range!\n" << RESET << std::endl;
 	}

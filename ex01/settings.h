@@ -13,6 +13,8 @@
 
 # define	MAX_CONTACTS	8
 
+# define    TRIM_INPUTS     true
+
 // line break settings
 # define	LINE_BREAK_LEN		65
 # define	LINE_BREAK_CHAR 	'-'

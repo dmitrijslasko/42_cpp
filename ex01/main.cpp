@@ -45,7 +45,8 @@ std::string promptInput(const std::string& prompt) {
 			std::cout << "\nEOF detected, quitting the phonebook..." << std::endl;
 			exit(0);
 		}
-		input = trim(input);
+		if (TRIM_INPUTS)
+			input = trim(input);
 		if (input.empty())
 		{
 			std::cout << printColor("⚠️  Empty input not allowed! Input text to proceed.\n", B_RED) << std::endl;
@@ -113,7 +114,8 @@ int	main(void) {
 		std::getline(std::cin, command);
 		std::cout << RESET;
 
-		command = trim(command);
+		if (TRIM_INPUTS)
+			command = trim(command);
 
 		// handle commands
 		if (command == CMD1)
@@ -133,8 +135,8 @@ int	main(void) {
 			std::cout << EOF_DETECTED_TEXT << std::endl;
 			return (0);
 		}
-		else
-			;
+		// else
+		// 	;
 		//{
 		//	std::cout << printColor(BAD_PROMPT_TEXT, BAD_PROMPT_CLR) << std::endl;
 		//	std::cout << std::endl;
