@@ -3,8 +3,8 @@
 #include <cctype>
 #include <cstdlib>
 
-#include "Contact.class.hpp"
-#include "PhoneBook.class.hpp"
+#include "Contact.hpp"
+#include "PhoneBook.hpp"
 
 #include "settings.h"
 

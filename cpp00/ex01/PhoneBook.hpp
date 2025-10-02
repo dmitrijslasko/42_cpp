@@ -1,7 +1,7 @@
-#ifndef PHONEBOOK_CLASS_H
-# define PHONEBOOK_CLASS_H
+#ifndef PHONEBOOK_H
+# define PHONEBOOK_H
 
-# include "Contact.class.hpp"
+# include "Contact.hpp"
 # include "settings.h"
 
 class PhoneBook {

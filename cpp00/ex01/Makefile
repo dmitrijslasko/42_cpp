@@ -10,12 +10,12 @@ CXXFLAGS += -Wold-style-cast -Wdeprecated-declarations -Wpedantic
 NAME = phonebook
 
 SRC = main.cpp \
-      Contact.class.cpp \
-      PhoneBook.class.cpp
+      Contact.cpp \
+      PhoneBook.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
-HEADERS = Contact.class.hpp PhoneBook.class.hpp settings.h utilities.h
+HEADERS = Contact.hpp PhoneBook.hpp settings.h utilities.h
 
 all: $(NAME)
 

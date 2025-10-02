@@ -3,24 +3,23 @@
 #include <string>
 #include <cstdlib>
 
-#include "PhoneBook.class.hpp"
+#include "PhoneBook.hpp"
 #include "settings.h"
 #include "utilities.h"
 
 size_t PhoneBook::_contactsCount = 0;
 
-PhoneBook::PhoneBook(void) {
+PhoneBook::PhoneBook( void ) {
 	if (SHOW_DEBUG)
 		std::cout << "PhoneBook.class default constructor called" << std::endl;
 }
 
-PhoneBook::~PhoneBook(void) {
+PhoneBook::~PhoneBook( void ) {
 	if (SHOW_DEBUG)
 		std::cout << "PhoneBook.class destructor called" << std::endl;
 }
 
-void PhoneBook::_pushContacts(void)
-{
+void PhoneBook::_pushContacts( void ) {
 	int maxIndex = PhoneBook::_contactsCount;
 
 	if (maxIndex == MAX_CONTACTS)
@@ -29,7 +28,7 @@ void PhoneBook::_pushContacts(void)
 		_contacts[i + 1] = _contacts[i];
 }
 
-void PhoneBook::add(void) {
+void PhoneBook::add( void ) {
 	if (SHOW_DEBUG)
 		std::cout << "PhoneBook.class add method" << std::endl;
 
@@ -55,7 +54,7 @@ void PhoneBook::add(void) {
 		PhoneBook::_contactsCount++;
 }
 
-void printHeader(void) {
+void printHeader( void ) {
     std::cout 	<< std::setw(DISPLAY_FIELD_WIDTH) << std::right << "#"
 				<< SEP_CLR << SEP_CHAR << RESET
     			<< std::setw(DISPLAY_FIELD_WIDTH) << std::right << "First"
@@ -67,14 +66,14 @@ void printHeader(void) {
     			<< std::endl;
 }
 
-std::string formatField(const std::string& str, size_t width) {
+std::string formatField( const std::string& str, size_t width ) {
     if (str.length() > width)
         return str.substr(0, width - 3) + "...";
     else
         return str;
 }
 
-bool isNumber(const std::string &str) {
+bool isNumber( const std::string &str)  {
 	if (str.empty())
 		return (false);
 
@@ -84,7 +83,7 @@ bool isNumber(const std::string &str) {
 	return (true);
 }
 
-int	PhoneBook::_printOutPhonebook(void) {
+int	PhoneBook::_printOutPhonebook( void ) {
 
 	if (PhoneBook::_contactsCount == 0)
 	{
@@ -113,7 +112,7 @@ int	PhoneBook::_printOutPhonebook(void) {
 	return 0;
 }
 
-void PhoneBook::search(void) {
+void PhoneBook::search( void ) {
 	if (SHOW_DEBUG)
 		std::cout << "PhoneBook.class search method" << std::endl;
 
@@ -150,7 +149,7 @@ void PhoneBook::search(void) {
 	std::cout << std::endl;
 }
 
-bool PhoneBook::exit(void) {
+bool PhoneBook::exit( void ) {
 	if (SHOW_DEBUG)
 		std::cout << "PhoneBook.class search method" << std::endl;
 
