@@ -4,14 +4,15 @@ YELLOW = \033[0;33m
 RST = \033[0m
 
 CC = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+CXXFLAGS = -Wall -Wextra -Werror
+CXXFLAGS += -std=c++98
 CXXFLAGS += -Wold-style-cast -Wdeprecated-declarations -Wpedantic
 
 NAME = main
 
 SRC = main.cpp \
       Zombie.cpp \
-	  zombieHorde.cpp \
+	  ZombieHorde.cpp \
 
 OBJ = $(SRC:.cpp=.o)
 

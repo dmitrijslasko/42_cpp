@@ -23,12 +23,12 @@
 // Zombies must be destroyed when you no longer need them. The destructor must print
 // a message with the name of the zombie for debugging purposes.
 
-Zombie::Zombie( void ) : name("Unnamed") {
+Zombie::Zombie( void ) : _name("Unnamed") {
 	std::cout << "> Zombie.class default constructor called" << std::endl;
 }
 
-Zombie::Zombie( std:: string name) : name(name) {
-    std::cout << "> Zombie.class parameterized constructor called" << std::endl;
+Zombie::Zombie( std::string name ) : _name(name) {
+	std::cout << "> Zombie.class parameterized constructor called" << std::endl;
 }
 
 Zombie::~Zombie( void ) {
@@ -36,5 +36,9 @@ Zombie::~Zombie( void ) {
 }
 
 void Zombie::announce( void ) {
-    std::cout << name << ": BraiiiiiiinnnzzzZ..." << std::endl;
+	std::cout << _name << ": BraiiiiiiinnnzzzZ..." << std::endl;
+}
+
+void Zombie::setName( std::string name ) {
+	_name = name;
 }

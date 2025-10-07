@@ -15,7 +15,10 @@ SRC = main.cpp \
 
 OBJ = $(SRC:.cpp=.o)
 
-HEADERS = Contact.hpp PhoneBook.hpp settings.h utilities.h
+HEADERS = 	Contact.hpp \
+			PhoneBook.hpp \
+			settings.h \
+			utilities.h
 
 all: $(NAME)
 

@@ -1,7 +1,6 @@
 #ifndef ZOMBIE_H
 # define ZOMBIE_H
 
-# include <iostream>
 # include <string>
 
 // First, implement a Zombie class.
@@ -27,23 +26,24 @@
 // Zombies must be destroyed when you no longer need them. The destructor must print
 // a message with the name of the zombie for debugging purposes.
 
-
 class Zombie {
-    public:
-        // 1. Constructors
-        Zombie();                   // default constructor
-        Zombie( std::string name );           // parameterized constructor
+	public:
+		// 1. Constructors
+		Zombie();                   // default constructor
+		Zombie( std::string name );           // parameterized constructor
 
-        // 2. Destructor
-        ~Zombie();
+		// 2. Destructor
+		~Zombie();
 
-        // 3. Public member functions
-        void announce( void );
+		// 3. Public member functions
+		void announce( void );
 
-    private:
-        std::string name;
+	private:
+		std::string name;
 };
 
+// Putting the following functions outside the class highlights that they’re not bound 
+// to a particular zombie — they’re general-purpose functions.
 Zombie* newZombie( std::string name );
 void randomChump( std::string name );
 

@@ -4,23 +4,22 @@ YELLOW = \033[0;33m
 RST = \033[0m
 
 CC = c++
-CXXFLAGS = -Wall -Wextra -Werror 
+CXXFLAGS = -Wall -Wextra -Werror
 CXXFLAGS += -std=c++98
 CXXFLAGS += -Wold-style-cast -Wdeprecated-declarations -Wpedantic
-# -Wold-style-cast → Warns on C-style casts.
-# -Wdeprecated-declarations → Warns on use of deprecated features.
-# -Wpedantic → Warns on non-standard extensions, enforces strict standard compliance.
 
 NAME = main
 
-SRC = main.cpp \
-      Zombie.cpp \
-	  newZombie.cpp \
-	  randomChump.cpp
+SRC = 	main.cpp \
+		HumanA.cpp \
+		HumanB.cpp \
+		Weapon.cpp \
 
 OBJ = $(SRC:.cpp=.o)
 
-HEADERS = Zombie.hpp
+HEADERS =	HumanA.hpp \
+			HumanB.hpp \
+			Weapon.hpp
 
 all: $(NAME)
 

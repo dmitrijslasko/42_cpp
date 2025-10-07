@@ -27,7 +27,7 @@ Zombie::Zombie( void ) : name("Unnamed") {
 	std::cout << "> Zombie.class default constructor called" << std::endl;
 }
 
-Zombie::Zombie( std:: string name) : name(name) {
+Zombie::Zombie( std:: string name ) : name(name) {
     std::cout << "> Zombie.class parameterized constructor called" << std::endl;
 }
 
