@@ -3,62 +3,67 @@
 #include <string>
 
 int main(int argc, char* argv[]) {
-
 	// validate input
-    if (argc != 4) {
-        std::cerr << "Usage: ./replace <filename> <old_text> <new_text>" << std::endl;
-        return 1;
-    }
+	if (argc != 4) {
+		std::cerr << "Usage: ./replace <filename> <old_text> <new_text>" << std::endl;
+		return 1;
+	}
 
 	// assign inputs
-    std::string filename = argv[1];
-    std::string old_text = argv[2];
-    std::string new_text = argv[3];
+	std::string filename = argv[1];
+	std::string old_text = argv[2];
+	std::string new_text = argv[3];
 
-    if (old_text.empty()) {
-        std::cerr << "Error: old_text cannot be empty." << std::endl;
-        return 1;
-    }
+	// check if old file is empty
+	if (old_text.empty()) {
+		std::cerr << "Error: old_text cannot be empty." << std::endl;
+		return 1;
+	}
 
 	// open file
-	// .c_str() is needed to conform to the 98 standard
-    std::ifstream infile(filename.c_str());
-    if (!infile) {
-        std::cerr << "Error: cannot open input file." << std::endl;
-        return 1;
-    }
+	// .c_str() is needed to conform to the ctd-98 standard
+	std::ifstream infile(filename.c_str());
+	if (!infile) {
+		std::cerr << "Error: cannot open input file." << std::endl;
+		return 1;
+	}
 
 	// read whole file content line by line
-    std::string content, line;
-    while (std::getline(infile, line)) 
+	std::string content;
+	std::string line;
+	while (std::getline(infile, line)) 
 	{
-        content += line;
-        if (!infile.eof())
-            content += '\n';
-    }
-    infile.close();
+		content += line;
+		if (!infile.eof())
+			content += '\n';
+	}
+	// close the file
+	infile.close();
 
 	// do the replacement
-    std::string result;
-    size_t pos = 0;
+	std::string result;
+	size_t pos = 0;
 	size_t found;
-    while ((found = content.find(old_text, pos)) != std::string::npos) 
+	// std::string::npos is a special constant in C++ that represents “no position” — basically meaning “not found”.
+	while ((found = content.find(old_text, pos)) != std::string::npos) 
 	{
-        result += content.substr(pos, found - pos);
-        result += new_text;
-        pos = found + old_text.length();
-    }
-    result += content.substr(pos);
+		result += content.substr(pos, found - pos);
+		result += new_text;
+		pos = found + old_text.length();
+	}
+	result += content.substr(pos);
 
 	// create new file
-    std::ofstream outfile((filename + ".replace").c_str());
-    if (!outfile) {
-        std::cerr << "Error: cannot create output file." << std::endl;
-        return 1;
-    }
+	std::string new_filename = filename + ".replace";
+	std::ofstream outfile(new_filename.c_str());
+	if (!outfile) {
+		std::cerr << "Error: cannot create output file." << std::endl;
+		return 1;
+	}
 
-    outfile << result;
-    outfile.close();
+	// output the result to the outfile & close it
+	outfile << result;
+	outfile.close();
 
-    return 0;
+	return 0;
 }

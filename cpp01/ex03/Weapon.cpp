@@ -1,5 +1,6 @@
 #include "Weapon.hpp"
 
+
 Weapon::Weapon( void ) {
 	std::cout << "> Weapon.class default constructor called" << std::endl;
 }

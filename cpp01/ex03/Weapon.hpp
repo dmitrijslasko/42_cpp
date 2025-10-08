@@ -1,8 +1,8 @@
 #ifndef WEAPON_H
 # define WEAPON_H
 
-# include <iostream>
 # include <string>
+# include <iostream>
 
 class Weapon {
 	public:

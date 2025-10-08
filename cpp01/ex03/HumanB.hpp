@@ -2,13 +2,14 @@
 # define HUMAN_B_H
 
 # include <string>
+# include <iostream>
 # include "Weapon.hpp"
 
 class HumanB {
 	public:
 		// 1. Constructors
-		HumanB( std::string name );                   	// default constructor
-		HumanB( std::string name, Weapon* weapon );		// parameterized constructor
+		HumanB( std::string name );                   	// parameterized constructor 1
+		HumanB( std::string name, Weapon* weapon );		// parameterized constructor 2
 
 		// 2. Destructor
 		~HumanB();

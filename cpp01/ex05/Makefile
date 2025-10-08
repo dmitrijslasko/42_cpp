@@ -8,13 +8,14 @@ CXXFLAGS = -Wall -Wextra -Werror
 CXXFLAGS += -std=c++98
 CXXFLAGS += -Wold-style-cast -Wdeprecated-declarations -Wpedantic
 
-NAME = main
+NAME =	harl
 
-SRC = 	main.cpp 
+SRC =	main.cpp \
+		Harl.cpp
 
-OBJ = $(SRC:.cpp=.o)
+OBJ = 	$(SRC:.cpp=.o)
 
-# HEADERS =	HumanA.hpp 
+HEADERS =	Harl.hpp 
 
 all: $(NAME)
 
