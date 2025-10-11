@@ -4,17 +4,18 @@ YELLOW = \033[0;33m
 RST = \033[0m
 
 CC = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+CXXFLAGS = -Wall -Wextra -Werror
+CXXFLAGS += -std=c++98
 CXXFLAGS += -Wold-style-cast -Wdeprecated-declarations -Wpedantic
 
-NAME = main
+NAME =	main
 
-SRC = tests.cpp \
-      Account.cpp \
+SRC =	main.cpp \
+		Fixed.cpp
 
-OBJ = $(SRC:.cpp=.o)
+OBJ = 	$(SRC:.cpp=.o)
 
-HEADERS = Account.hpp
+HEADERS =	Fixed.hpp
 
 all: $(NAME)
 
@@ -30,7 +31,6 @@ $(NAME): $(OBJ)
 	$(call status, 🟢 Linking object files..., $(GREEN))
 	$(CC) $(CXXFLAGS) $(OBJ) -o $(NAME)
 	@echo ""
-	./$(NAME) > log.log
 
 # Compilation
 %.o: %.cpp $(HEADERS)
