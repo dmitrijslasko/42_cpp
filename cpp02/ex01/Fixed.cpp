@@ -6,6 +6,15 @@ Fixed::Fixed( void ) : _value(0) {
 	std::cout << "Default constructor called" << std::endl;
 }
 
+Fixed::Fixed(const int input) {
+	std::cout << "Int constructor called" << std::endl;
+	this->_value = input;
+}
+
+Fixed::Fixed(const float input) {
+	std::cout << "Float constructor called" << std::endl;
+}
+
 // 2. copy constructor
 Fixed::Fixed(const Fixed& other) {
 	std::cout << "Copy constructor called" << std::endl;

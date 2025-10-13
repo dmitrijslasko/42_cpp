@@ -4,7 +4,7 @@
 
 #define PLACEHOLDER_TEXT "* LOUD AND UNBEARABLE FEEDBACK NOISE *"
 
-int main(int argc, char **argv) 
+int main(int argc, char **argv)
 {
 	if (argc == 1)
 	{
@@ -13,7 +13,8 @@ int main(int argc, char **argv)
 	}
 
 	for (int i = 1; i < argc; i++) {
-		std::string s(argv[i]);
+		std::string s = std::string(argv[i]);
+		// same as std::string s(argv[i]);
 		for (std::size_t j = 0; j < s.size(); ++j) {
 			s[j] = static_cast<char>(std::toupper(static_cast<unsigned char>(s[j])));
 		}

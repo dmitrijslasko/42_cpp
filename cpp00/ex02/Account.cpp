@@ -22,7 +22,7 @@ int	Account::_totalNbWithdrawals = 0;
 Account::Account( int amount ) {
 	if (SHOW_DEBUG)
 		std::cout << "Account class parameterized constructor called" << std::endl;
-	
+
 	_accountIndex = Account::_nbAccounts++;
 	_amount = amount;
 	_totalAmount += amount;

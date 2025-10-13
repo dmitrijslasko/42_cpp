@@ -7,7 +7,9 @@
 class PhoneBook {
 
 	public:
+		// constructor
 		PhoneBook(void);
+		// destructor
 		~PhoneBook(void);
 
 		void add(void);
