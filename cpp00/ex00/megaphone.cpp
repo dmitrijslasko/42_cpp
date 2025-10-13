@@ -16,6 +16,7 @@ int main(int argc, char **argv)
 		std::string s = std::string(argv[i]);
 		// same as std::string s(argv[i]);
 		for (std::size_t j = 0; j < s.size(); ++j) {
+			// toupper() function signature: int std::toupper(int ch);
 			s[j] = static_cast<char>(std::toupper(static_cast<unsigned char>(s[j])));
 		}
 		std::cout << s;

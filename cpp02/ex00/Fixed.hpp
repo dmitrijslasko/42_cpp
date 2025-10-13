@@ -6,6 +6,7 @@
 // functions that every well-behaved C++ class should define when it manages resources —
 // or simply to make its behavior explicit.
 
+//Each fixed-point value is stored as an integer, but scaled by 2^fractional_bits
 class Fixed {
 
 	public:
@@ -23,8 +24,8 @@ class Fixed {
 		void setRawBits (int const raw );
 
 	private:
-		int	_value;
+		int _value;
 		static const int _fractional_bits = 8;
 
-	
+
 };
