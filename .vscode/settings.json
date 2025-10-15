@@ -71,5 +71,9 @@
 		"chrono": "cpp",
 		"format": "cpp",
 		"fstream": "cpp"
+	},
+	"editor.tokenColorCustomizations": {
+		"comments": "",
+		"textMateRules": []
 	}
 }

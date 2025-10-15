@@ -17,7 +17,7 @@ OBJ = 	$(SRC:.cpp=.o)
 
 HEADERS =	Fixed.hpp
 
-all: $(NAME)
+all: compile $(NAME)
 
 # Function for status messages
 define status
@@ -33,10 +33,13 @@ $(NAME): $(OBJ)
 	@echo ""
 
 # Compilation
+compile:
+	$(call status, 🟢 Compiling all source files..., $(GREEN))
+	@$(MAKE) $(OBJ) --no-print-directory
+
 %.o: %.cpp $(HEADERS)
-	$(call status, 🟢 Compiling object file $< ..., $(GREEN))
-	$(CC) $(CXXFLAGS) -c $< -o $@
-	@echo ""
+	@printf "Compiling %-20s → %-20s\n" "$<" "$@"
+	@$(CC) $(CXXFLAGS) -c $< -o $@
 
 clean:
 	$(call status, 🟡 Performing clean - deleting object files..., $(YELLOW))
@@ -44,10 +47,10 @@ clean:
 	@echo ""
 
 fclean: clean
-	$(call status, 🟡 Performing full clean – deleting binaries and object files..., $(YELLOW))
+	$(call status, 🟡 Performing full clean – deleting binaries..., $(YELLOW))
 	rm -f $(NAME)
 	@echo ""
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all compile clean fclean re

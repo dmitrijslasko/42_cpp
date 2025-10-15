@@ -28,10 +28,11 @@
 // a message with the name of the zombie for debugging purposes.
 
 class Zombie {
+
 	public:
 		// 1. Constructors
-		Zombie();                   // default constructor
-		Zombie( std::string name );           // parameterized constructor
+		Zombie();                   	// default constructor
+		Zombie( std::string name );		// parameterized constructor
 
 		// 2. Destructor
 		~Zombie();
@@ -43,9 +44,13 @@ class Zombie {
 		std::string name;
 };
 
-// Putting the following functions outside the class highlights that they’re not bound 
+// Putting the following functions outside the class highlights that they’re not bound
 // to a particular zombie — they’re general-purpose functions.
+// This function creates a zombie, names it, and returns it so you can use it outside
+// of the function scope
 Zombie* newZombie( std::string name );
+
+// This function creates a zombie, names it, and makes it announce itself
 void randomChump( std::string name );
 
 #endif

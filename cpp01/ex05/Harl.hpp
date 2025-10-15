@@ -11,16 +11,15 @@
 
 class Harl {
 	public:
-		// 1. Constructors
+		// 1. Constructor
 		Harl();                   	// default constructor
-		// Harl( std::string name );		// parameterized constructor
 
 		// 2. Destructor
 		~Harl();
 
 		// 3. Public member functions
 		void complain( std::string level );
-		
+
 	private:
 		void debug( void );
 		void info( void );

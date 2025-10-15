@@ -4,11 +4,13 @@
 
 # define SHOW_DEBUG_OUTPUT 0
 
+// 1. Constructor
 Harl::Harl( void ) {
 	if (SHOW_DEBUG_OUTPUT)
 		std::cout << "> Harl.class default constructor called" << std::endl;
 }
 
+// 2. Destructor
 Harl::~Harl( void ) {
 	if (SHOW_DEBUG_OUTPUT)
 		std::cout << "> Harl.class destructor called" << std::endl;
@@ -58,7 +60,7 @@ void Harl::complain( std::string level ) {
 		case 0:
 			debug();
 		case 1:
-			info();	
+			info();
 		case 2:
 			warning();
 		case 3:

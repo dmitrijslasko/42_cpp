@@ -4,11 +4,13 @@
 
 # define SHOW_DEBUG_OUTPUT 0
 
+// 1. Constructors
 Harl::Harl( void ) {
 	if (SHOW_DEBUG_OUTPUT)
 		std::cout << "> Harl.class default constructor called" << std::endl;
 }
 
+// 2. Destructor
 Harl::~Harl( void ) {
 	if (SHOW_DEBUG_OUTPUT)
 		std::cout << "> Harl.class destructor called" << std::endl;

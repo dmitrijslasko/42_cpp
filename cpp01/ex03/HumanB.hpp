@@ -9,18 +9,18 @@ class HumanB {
 	public:
 		// 1. Constructors
 		HumanB( std::string name );                   	// parameterized constructor 1
-		HumanB( std::string name, Weapon* weapon );		// parameterized constructor 2
+		HumanB( std::string name, Weapon *weapon );		// parameterized constructor 2
 
 		// 2. Destructor
 		~HumanB();
 
 		// 3. Public member functions
 		void attack( void );
-		void setWeapon( Weapon& weapon );
-		
+		void setWeapon( Weapon &weapon );
+
 	private:
 		std::string _name;
-		Weapon* _weapon;
+		Weapon *_weapon;
 };
 
 #endif

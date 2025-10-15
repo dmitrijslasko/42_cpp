@@ -15,11 +15,11 @@ class Weapon {
 
 		// 3. Public member functions
 		// void announce( void );
-		std::string& getType( void );
+		const std::string &getType( void ) const;
 		void setType( std::string type );
-		
+
 	private:
-		std::string _type;
+		std::string type;
 };
 
 #endif

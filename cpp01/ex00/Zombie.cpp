@@ -1,11 +1,11 @@
 #include "Zombie.hpp"
 
-// First, implement a Zombie class. 
+// First, implement a Zombie class.
 // It has a private string attribute name.
-// Add a member function void announce( void ); to the Zombie class. 
+// Add a member function void announce( void ); to the Zombie class.
 // Zombies announce themselves as follows:
 // <name>: BraiiiiiiinnnzzzZ...
-// Do not print the angle brackets (< and >). 
+// Do not print the angle brackets (< and >).
 
 // For a zombie named Foo, the message would be:
 // Foo: BraiiiiiiinnnzzzZ...
@@ -24,15 +24,15 @@
 // a message with the name of the zombie for debugging purposes.
 
 Zombie::Zombie( void ) : name("Unnamed") {
-	std::cout << "> Zombie.class default constructor called" << std::endl;
+	std::cout << "> [" << name << "] Zombie.class default constructor called" << std::endl;
 }
 
 Zombie::Zombie( std:: string name ) : name(name) {
-    std::cout << "> Zombie.class parameterized constructor called" << std::endl;
+	std::cout << "> [" << name << "] Zombie.class parameterized constructor called" << std::endl;
 }
 
 Zombie::~Zombie( void ) {
-	std::cout << "> Zombie.class destructor called" << std::endl;
+	std::cout << "> [" << name << "] Zombie.class destructor called" << std::endl;
 }
 
 void Zombie::announce( void ) {

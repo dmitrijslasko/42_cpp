@@ -13,9 +13,12 @@ class Fixed {
 		// 1. default constructor
 		Fixed();
 		// 2. copy constructor
+		// The copy constructor takes a reference to an object
+		// and constructs a new one based on the values of the
+		// referenced one.
 		Fixed(const Fixed& other);
 		// 3. copy assignment operator overload
-		Fixed& operator=(const Fixed& other);
+		Fixed &operator=(const Fixed &other);
 		// 4. destructor
 		~Fixed();
 
@@ -26,6 +29,5 @@ class Fixed {
 	private:
 		int _value;
 		static const int _fractional_bits = 8;
-
 
 };

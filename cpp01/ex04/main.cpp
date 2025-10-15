@@ -3,7 +3,8 @@
 #include <string>
 
 int main(int argc, char* argv[]) {
-	// validate input
+
+	// validate inputs
 	if (argc != 4) {
 		std::cerr << "Usage: ./replace <filename> <old_text> <new_text>" << std::endl;
 		return 1;
@@ -28,24 +29,26 @@ int main(int argc, char* argv[]) {
 		return 1;
 	}
 
-	// read whole file content line by line
+	// std::getline(infile, line) - to read whole file content line by line
 	std::string content;
 	std::string line;
-	while (std::getline(infile, line)) 
+	while (std::getline(infile, line))
 	{
 		content += line;
 		if (!infile.eof())
 			content += '\n';
 	}
-	// close the file
+	// In C++, file streams like std::ifstream and std::ofstream follow
+	// RAII — Resource Acquisition Is Initialization.
+	// You don’t have to close it manually — but it’s sometimes good practice.
 	infile.close();
 
-	// do the replacement
+	// Do the replacement
 	std::string result;
 	size_t pos = 0;
 	size_t found;
 	// std::string::npos is a special constant in C++ that represents “no position” — basically meaning “not found”.
-	while ((found = content.find(old_text, pos)) != std::string::npos) 
+	while ((found = content.find(old_text, pos)) != std::string::npos)
 	{
 		result += content.substr(pos, found - pos);
 		result += new_text;

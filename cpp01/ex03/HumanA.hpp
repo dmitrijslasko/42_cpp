@@ -9,17 +9,17 @@ class HumanA {
 	public:
 		// 1. Constructors
 		// HumanA();                   		            // default constructor
-		HumanA( std::string name, Weapon& weapon );		// parameterized constructor
+		HumanA( std::string name, Weapon &weapon );		// parameterized constructor
 
 		// 2. Destructor
 		~HumanA();
 
 		// 3. Public member functions
 		void attack( void );
-		
+
 	private:
 		std::string _name;
-		Weapon& _weapon;
+		Weapon &_weapon;
 };
 
 #endif

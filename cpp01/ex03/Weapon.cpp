@@ -5,7 +5,7 @@ Weapon::Weapon( void ) {
 	std::cout << "> Weapon.class default constructor called" << std::endl;
 }
 
-Weapon::Weapon( std::string type ) : _type(type) {
+Weapon::Weapon( std::string type ) : type(type) {
 	std::cout << "> Weapon.class parameterized constructor called" << std::endl;
 }
 
@@ -14,9 +14,9 @@ Weapon::~Weapon( void ) {
 }
 
 void Weapon::setType( std::string type ) {
-	_type = type;
+	this->type = type;
 }
 
-std::string& Weapon::getType( void ) {
-	return _type;
+const std::string& Weapon::getType( void ) const {
+	return type;
 }

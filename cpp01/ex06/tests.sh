@@ -5,7 +5,7 @@
 if [ -f "Makefile" ]; then
     echo "🧱 Compiling project..."
     make re > /dev/null 2>&1 || { echo "❌ Compilation failed"; exit 1; }
-elif [ ! -x "./harlFilter" ]; then
+elif [ ! -x "./main" ]; then
     echo "⚠️ No Makefile found and ./harl not executable"
     exit 1
 fi
@@ -31,9 +31,9 @@ for case in "${TEST_CASES[@]}"; do
     echo "🧪 Test case: '$case'"
     echo "----------------------------"
     if [ -z "$case" ]; then
-        ./harlFilter
+        ./main
     else
-        ./harlFilter $case
+        ./main $case
     fi
     echo "----------------------------"
 done
