@@ -33,11 +33,41 @@ class Fixed {
 		//A member function int toInt( void ) const;
 		int toInt( void ) const;
 
+		bool operator>(const Fixed &other) const;
+		bool operator<(const Fixed &other) const;
+		bool operator>=(const Fixed &other) const;
+		bool operator<=(const Fixed &other) const;
+		bool operator==(const Fixed &other) const;
+		bool operator!=(const Fixed &other) const;
+
+		// Arithmetic operators
+		Fixed operator+(const Fixed &other) const;
+		Fixed operator-(const Fixed &other) const;
+		Fixed operator*(const Fixed &other) const;
+		Fixed operator/(const Fixed &other) const;
+
+		// Increment / Decrement operators
+		Fixed& operator++();     // pre-increment (++a)
+		Fixed operator++(int);   // post-increment (a++)
+		Fixed& operator--();     // pre-decrement (--a)
+		Fixed operator--(int);   // post-decrement (a--)
+
+		// Min / Max functions
+		//By providing both const and non-const versions:
+		//The compiler automatically picks the right one.
+		//You get maximum flexibility:
+		//returns non-const ref if you pass non-const objects;
+		//returns const ref if you pass const objects.
+		static Fixed& min(Fixed &a, Fixed &b);
+		static const Fixed& min(const Fixed &a, const Fixed &b);
+		static Fixed& max(Fixed &a, Fixed &b);
+		static const Fixed& max(const Fixed &a, const Fixed &b);
+
 	private:
 		//_	value stores both integer and fractional parts, scaled by 2^_fractional_bits.
 		//	So if _fractional_bits = 8, then _value = 256 represents 1.0 (because 256 / 2⁸ = 1).
 		int	_value;
-		static const int _fractional_bits = 3;
+		static const int _fractional_bits = 8;
 };
 
 // An overload of the insertion («) operator that inserts a floating-point representation
