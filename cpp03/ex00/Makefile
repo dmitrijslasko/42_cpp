@@ -24,7 +24,7 @@ OBJ = $(SRC:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 HEADERS = $(INC_DIR)/ClapTrap.hpp
 
 # =================== Rules ===================
-all: $(NAME)
+all: compile $(NAME)
 
 # Function for status messages
 define status
@@ -46,6 +46,15 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp $(HEADERS)
 	$(CC) $(CXXFLAGS) -I$(INC_DIR) -c $< -o $@
 	@echo ""
 
+# Compilation
+compile:
+	@mkdir -p $(OBJ_DIR)
+	$(call status, 🟢 Compiling all source files..., $(GREEN))
+	@$(MAKE) $(OBJ) --no-print-directory
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp $(HEADERS)
+	@printf "Compiling %-20s → %-20s\n" "$<" "$@"
+	@$(CC) $(CXXFLAGS) -I$(INC_DIR) -c $< -o $@
 
 clean:
 	$(call status,🟡 Cleaning object files..., $(YELLOW))

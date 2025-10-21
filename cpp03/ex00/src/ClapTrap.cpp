@@ -7,7 +7,7 @@ ClapTrap::ClapTrap()
 	  _energy_pts(10),
 	  _attack_damage(0)
 {
-	std::cout << "ClapTrap default constructor called" << std::endl;
+	std::cout << ">>> ClapTrap default constructor called" << std::endl;
 }
 
 // Constructor (parameterized)
@@ -17,11 +17,11 @@ ClapTrap::ClapTrap(std::string name)
 	  _energy_pts(10),
 	  _attack_damage(0)
 {
-	std::cout 	<< "ClapTrap parameterized constructor called: "
-				<< _name << " " 
-				<< _hit_pts << " " 
-				<< _energy_pts << " " 
-				<< _attack_damage 
+	std::cout 	<< ">>> ClapTrap parameterized constructor called: "
+				<< _name << " "
+				<< _hit_pts << " "
+				<< _energy_pts << " "
+				<< _attack_damage
 				<< std::endl;
 }
 
@@ -32,10 +32,10 @@ ClapTrap::ClapTrap(const ClapTrap &other)
 	  _energy_pts(other._energy_pts),
 	  _attack_damage(other._attack_damage)
 {
-	std::cout << "ClapTrap copy constructor called for " << _name << std::endl;
+	std::cout << ">>> ClapTrap copy constructor called for " << _name << std::endl;
 }
 ClapTrap &ClapTrap::operator=(const ClapTrap &other) {
-	std::cout << "ClapTrap copy assignment operator called" << std::endl;
+	std::cout << ">>> ClapTrap copy assignment operator called" << std::endl;
 	if (this != &other) {
 		_name = other._name;
 		_hit_pts = other._hit_pts;
@@ -47,7 +47,7 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &other) {
 
 // Destructor
 ClapTrap::~ClapTrap() {
-	std::cout << "ClapTrap destructor called" << std::endl;
+	std::cout << ">>> ClapTrap destructor called" << std::endl;
 }
 
 // Public methods
@@ -65,7 +65,7 @@ void ClapTrap::attack(const std::string& target) {
 }
 
 void ClapTrap::takeDamage(unsigned int amount) {
-	
+
 	if (this->_hit_pts > amount)
 		this->_hit_pts -= amount;
 	else if (this->_hit_pts > 0)

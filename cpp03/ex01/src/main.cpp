@@ -4,9 +4,9 @@
 
 int	main ( void ) {
 
-	ClapTrap	johnhy = ClapTrap("johnny");
-	ClapTrap	mikey = ClapTrap(johnhy);
-	ClapTrap billy;
+	ScavTrap	johnhy = ScavTrap("johnny");
+	ScavTrap	mikey = ScavTrap(johnhy);
+	ScavTrap billy;
 	billy = johnhy; // copy assignment
 
 	johnhy.attack("jimmy");
@@ -17,8 +17,10 @@ int	main ( void ) {
 	johnhy.takeDamage(15);
 	johnhy.takeDamage(15);
 	johnhy.beRepaired(15);
+	johnhy.guardGate();
 	mikey.attack("johnhy");
 	billy.attack("johnhy");
+	johnhy.guardGate();
 
 	ScavTrap	tommy = ScavTrap("tommy");
 	tommy.attack("winnie");

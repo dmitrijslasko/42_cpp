@@ -6,7 +6,7 @@ int	main ( void ) {
 	ClapTrap	johnhy = ClapTrap("johnny");
 	ClapTrap	mikey = ClapTrap(johnhy);
 	ClapTrap billy;
-	billy = johnhy; // copy assignment
+	billy = johnhy;
 
 	johnhy.attack("jimmy");
 	johnhy.beRepaired(2);

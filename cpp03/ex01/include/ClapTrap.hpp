@@ -4,6 +4,40 @@
 # include <string>
 # include <iostream>
 
+class ClapTrap {
+
+	protected:
+		// Name, which is passed as a parameter to the constructor
+		std::string	_name;
+		// Hit points (10), representing the health of the ClapTrap
+		unsigned int	_hit_pts;
+		// Energy points (10)
+		unsigned int	_energy_pts;
+		// Attack damage (0)
+		unsigned int	_attack_damage;
+
+	public:
+		// Constructor (default)
+		ClapTrap();
+
+		// Constructor (parameterized)
+		ClapTrap(std::string name);
+
+		// Copy constructor
+		ClapTrap(const ClapTrap &other);
+
+		// Copy assignment operator
+		ClapTrap &operator=(const ClapTrap &other);
+
+		// Destructor
+		virtual ~ClapTrap();
+
+		// Public methods
+		virtual void attack(const std::string& target);
+		void takeDamage(unsigned int amount);
+		void beRepaired(unsigned int amount);
+};
+
 // terminal Colors (ANSI Escape Codes)
 # define	BLACK			"\033[30m"
 # define	GREY			"\033[90m"
@@ -23,38 +57,5 @@
 # define	B_CYAN			"\033[96m"
 # define	B_WHITE			"\033[97m"
 # define 	RESET			"\033[0m"
-
-class ClapTrap {
-	protected:
-	// Name, which is passed as a parameter to the constructor
-	std::string	_name;
-	// Hit points (10), representing the health of the ClapTrap
-	unsigned int	_hit_pts;
-	// Energy points (10)
-	unsigned int	_energy_pts;
-	// Attack damage (0)
-	unsigned int	_attack_damage;
-
-	public:
-		// Constructor (default)
-		ClapTrap();
-
-		// Constructor (parameterized)
-		ClapTrap(std::string name);
-
-		// Copy constructor
-		ClapTrap(const ClapTrap &other);
-
-		// Copy assignment operator
-		ClapTrap &operator=(const ClapTrap &other);
-
-		// Destructor
-		~ClapTrap();
-
-		// Public methods
-		void attack(const std::string& target);
-		void takeDamage(unsigned int amount);
-		void beRepaired(unsigned int amount);
-};
 
 #endif
