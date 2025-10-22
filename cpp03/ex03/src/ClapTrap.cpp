@@ -3,9 +3,9 @@
 // Constructor (default)
 ClapTrap::ClapTrap()
 	: _name("default"),
-	  _hit_pts(10),
-	  _energy_pts(10),
-	  _attack_damage(0)
+	  _hitPoints(10),
+	  _energyPoints(10),
+	  _attackDamage(0)
 {
 	std::cout << "ClapTrap default constructor called" << std::endl;
 }
@@ -13,24 +13,24 @@ ClapTrap::ClapTrap()
 // Constructor (parameterized)
 ClapTrap::ClapTrap(std::string name)
 	: _name(name),
-	  _hit_pts(10),
-	  _energy_pts(10),
-	  _attack_damage(0)
+	  _hitPoints(10),
+	  _energyPoints(10),
+	  _attackDamage(0)
 {
 	std::cout 	<< "ClapTrap parameterized constructor called: "
-				<< _name << " " 
-				<< _hit_pts << " " 
-				<< _energy_pts << " " 
-				<< _attack_damage 
+				<< _name << " "
+				<< _hitPoints << " "
+				<< _energyPoints << " "
+				<< _attackDamage
 				<< std::endl;
 }
 
 // Copy constructor
 ClapTrap::ClapTrap(const ClapTrap &other)
 	: _name(other._name),
-	  _hit_pts(other._hit_pts),
-	  _energy_pts(other._energy_pts),
-	  _attack_damage(other._attack_damage)
+	  _hitPoints(other._hitPoints),
+	  _energyPoints(other._energyPoints),
+	  _attackDamage(other._attackDamage)
 {
 	std::cout << "ClapTrap copy constructor called for " << _name << std::endl;
 }
@@ -38,9 +38,9 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &other) {
 	std::cout << "ClapTrap copy assignment operator called" << std::endl;
 	if (this != &other) {
 		_name = other._name;
-		_hit_pts = other._hit_pts;
-		_energy_pts = other._energy_pts;
-		_attack_damage = other._attack_damage;
+		_hitPoints = other._hitPoints;
+		_energyPoints = other._energyPoints;
+		_attackDamage = other._attackDamage;
 	}
 	return *this;
 }
@@ -52,24 +52,24 @@ ClapTrap::~ClapTrap() {
 
 // Public methods
 void ClapTrap::attack(const std::string& target) {
-	if (this->_energy_pts && this->_hit_pts) {
+	if (this->_energyPoints && this->_hitPoints) {
 		std::cout << B_YELLOW;
-		std::cout << "ClapTrap " << _name << " attacks " << target << ", causing " << _attack_damage << " points of damage!\n";
+		std::cout << "ClapTrap " << _name << " attacks " << target << ", causing " << _attackDamage << " points of damage!\n";
 		std::cout << RESET;
-		this->_energy_pts--;
+		this->_energyPoints--;
 	}
-	else if (this->_energy_pts == 0)
+	else if (this->_energyPoints == 0)
 		std::cout << "ClapTrap " << _name << " can't attack " << target << ": not enough energy points!\n";
 	else
 		std::cout << "ClapTrap " << _name << " can't attack " << target << ": not enough hit points!\n";
 }
 
 void ClapTrap::takeDamage(unsigned int amount) {
-	
-	if (this->_hit_pts > amount)
-		this->_hit_pts -= amount;
-	else if (this->_hit_pts > 0)
-		this->_hit_pts = 0;
+
+	if (this->_hitPoints > amount)
+		this->_hitPoints -= amount;
+	else if (this->_hitPoints > 0)
+		this->_hitPoints = 0;
 	else {
 		std::cout << B_RED;
 		std::cout << "ClapTrap " << _name << " already has 0 hit points. Stop hitting him!\n";
@@ -77,25 +77,25 @@ void ClapTrap::takeDamage(unsigned int amount) {
 		return ;
 	}
 	std::cout << B_CYAN;
-	std::cout << "ClapTrap " << _name << " takes damage of " << amount  << " points. Current hit points: " << this->_hit_pts << "\n";
+	std::cout << "ClapTrap " << _name << " takes damage of " << amount  << " points. Current hit points: " << this->_hitPoints << "\n";
 	std::cout << RESET;
 }
 
 void ClapTrap::beRepaired(unsigned int amount) {
-	if (this->_energy_pts == 0) {
+	if (this->_energyPoints == 0) {
 		std::cout << B_RED;
 		std::cout << "ClapTrap " << _name << " can't get repaired: not enough energy points!\n";
 		std::cout << RESET;
 		return ;
 	}
-	else if (this->_hit_pts == 0) {
+	else if (this->_hitPoints == 0) {
 		std::cout << B_RED;
 		std::cout << "ClapTrap " << _name << " can't get repaired: not enough hit points!\n";
 		std::cout << RESET;
 		return ;
 	}
-	this->_hit_pts += amount;
+	this->_hitPoints += amount;
 	std::cout << B_GREEN;
-	std::cout << "ClapTrap " << _name << " got repaired for " << amount  << " points. Current hit points: " << this->_hit_pts << "\n";
+	std::cout << "ClapTrap " << _name << " got repaired for " << amount  << " points. Current hit points: " << this->_hitPoints << "\n";
 	std::cout << RESET;
 }

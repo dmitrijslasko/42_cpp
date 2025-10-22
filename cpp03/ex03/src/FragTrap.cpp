@@ -2,17 +2,17 @@
 
 // Default constructor
 FragTrap::FragTrap() : ClapTrap() {
-	_hit_pts = 100;
-	_energy_pts = 100;
-	_attack_damage = 30;
+	_hitPoints = 100;
+	_energyPoints = 100;
+	_attackDamage = 30;
 	std::cout << "FragTrap default constructor called\n";
 }
 
 // Parameterized constructor
 FragTrap::FragTrap(std::string name) : ClapTrap(name) {
-	_hit_pts = 100;
-	_energy_pts = 100;
-	_attack_damage = 30;
+	_hitPoints = 100;
+	_energyPoints = 100;
+	_attackDamage = 30;
 	std::cout << "FragTrap constructor called for " << _name << "\n";
 }
 

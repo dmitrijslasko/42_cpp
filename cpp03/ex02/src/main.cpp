@@ -3,35 +3,60 @@
 #include "ScavTrap.hpp"
 #include "FragTrap.hpp"
 
+using std::cout;
+
+void	printSeparator( void ) {
+	cout << "---------------------------------------------------------\n";
+}
+
 int	main ( void ) {
+	{
+		printSeparator();
+		cout << "DEFAULT CONSTRUCTOR\n";
+		ClapTrap	unnamed = ClapTrap();
+	}
+	{
+		printSeparator();
+		cout << "PARAMETERIZED CONSTRUCTOR\n";
+		ClapTrap	johnhy("Johnny");
 
-	ScavTrap	johnhy = ScavTrap("johnny");
-	ScavTrap	mikey = ScavTrap(johnhy);
-	ScavTrap billy;
-	billy = johnhy; // copy assignment
-
-	johnhy.attack("jimmy");
-	johnhy.beRepaired(2);
-	johnhy.takeDamage(1);
-	johnhy.takeDamage(15);
-	johnhy.takeDamage(15);
-	johnhy.takeDamage(15);
-	johnhy.takeDamage(15);
-	johnhy.beRepaired(15);
-	johnhy.guardGate();
-	mikey.attack("johnhy");
-	billy.attack("johnhy");
-	johnhy.guardGate();
-
-	ScavTrap	tommy = ScavTrap("tommy");
-	tommy.attack("winnie");
-	tommy.takeDamage(20);
-	tommy.beRepaired(50);
-
-	FragTrap frag = FragTrap("frag");
-	frag.highFivesGuys();
-	frag.attack("victim");
-	frag.takeDamage(20);
-
+		for (int i = 0; i < 15; i++)
+			johnhy.attack("Jimmy");
+		johnhy.beRepaired(2);
+		johnhy.takeDamage(1);
+		johnhy.takeDamage(15);
+		johnhy.takeDamage(15);
+		johnhy.takeDamage(15);
+		johnhy.takeDamage(15);
+		johnhy.beRepaired(15);
+	}
+	{
+		printSeparator();
+		cout << "COPY CONSTRUCTOR\n";
+		ClapTrap	johnhy("Johny");
+		ClapTrap	jimmy(johnhy);
+	}
+	{
+		printSeparator();
+		cout << "COPY ASSIGNMENT OPERATOR\n";
+		ClapTrap	johnhy("Johny");
+		ClapTrap	jimmy;
+		jimmy = johnhy;
+	}
+	{
+		printSeparator();
+		cout << "CHILD CLASS METHODS - ScavTrap\n";
+		ScavTrap	scavJohnhy("ScavJohny");
+		scavJohnhy.attack("Molly");
+		scavJohnhy.takeDamage(30);
+	}
+	{
+		printSeparator();
+		cout << "CHILD CLASS METHODS - FragTrap\n";
+		ScavTrap	fragJohnhy("FragJohny");
+		fragJohnhy.attack("Dolly");
+		fragJohnhy.takeDamage(30);
+	}
+	printSeparator();
 	return 0;
 }

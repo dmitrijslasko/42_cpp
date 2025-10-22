@@ -2,18 +2,18 @@
 
 // Default constructor
 ScavTrap::ScavTrap() : ClapTrap() {
-	_hit_pts = 100;
-	_energy_pts = 50;
-	_attack_damage = 20;
+	_hitPoints = 100;
+	_energyPoints = 50;
+	_attackDamage = 20;
 	_guardGateMode = false;
 	std::cout << "ScavTrap default constructor called\n";
 }
 
 // Parameterized constructor
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name) {
-	_hit_pts = 100;
-	_energy_pts = 50;
-	_attack_damage = 20;
+	_hitPoints = 100;
+	_energyPoints = 50;
+	_attackDamage = 20;
 	_guardGateMode = false;
 	std::cout << "ScavTrap constructor called for " << _name << "\n";
 }
@@ -42,13 +42,13 @@ ScavTrap::~ScavTrap() {
 // Overridden attack method
 void ScavTrap::attack(const std::string& target) {
 
-	if (this->_energy_pts && this->_hit_pts) {
+	if (this->_energyPoints && this->_hitPoints) {
 		std::cout << B_YELLOW;
-		std::cout << "ScavTrap " << _name << " attacks " << target << ", causing " << _attack_damage << " points of damage!\n";
+		std::cout << "ScavTrap " << _name << " attacks " << target << ", causing " << _attackDamage << " points of damage!\n";
 		std::cout << RESET;
-		this->_energy_pts--;
+		this->_energyPoints--;
 	}
-	else if (this->_energy_pts == 0)
+	else if (this->_energyPoints == 0)
 		std::cout << "ScavTrap " << _name << " can't attack " << target << ": not enough energy points!\n";
 	else
 		std::cout << "ScavTrap " << _name << " can't attack " << target << ": not enough hit points!\n";
