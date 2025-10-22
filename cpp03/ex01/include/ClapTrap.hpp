@@ -8,7 +8,7 @@ class ClapTrap {
 
 	protected:
 		// Name, which is passed as a parameter to the constructor
-		std::string	_name;
+		std::string		_name;
 		// Hit points (10), representing the health of the ClapTrap
 		unsigned int	_hitPoints;
 		// Energy points (10)
