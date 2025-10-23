@@ -1,0 +1,76 @@
+# =================== Colors ===================
+RED    = \033[0;31m
+GREEN  = \033[0;32m
+YELLOW = \033[0;33m
+RST    = \033[0m
+
+# =================== Compiler ===================
+CC = c++
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+CXXFLAGS += -Wold-style-cast -Wdeprecated-declarations -Wpedantic
+
+# =================== Project ===================
+NAME = main
+
+SRC_DIR = src
+OBJ_DIR = obj
+INC_DIR = include
+UTILS_DIR = ../utils
+
+SRC = 	$(SRC_DIR)/main.cpp 		\
+		$(SRC_DIR)/Animal.cpp 		\
+		$(SRC_DIR)/Dog.cpp			\
+		$(SRC_DIR)/Cat.cpp 			\
+		$(SRC_DIR)/Brain.cpp 		\
+		$(UTILS_DIR)/utils.cpp		\
+
+# Convert all .cpp to .o inside obj folder (regardless of location)
+OBJ = $(patsubst %.cpp,$(OBJ_DIR)/%.o,$(notdir $(SRC)))
+
+HEADERS = 	$(INC_DIR)/Animal.hpp		\
+			$(INC_DIR)/Dog.hpp			\
+			$(INC_DIR)/Cat.hpp			\
+			$(INC_DIR)/Brain.hpp		\
+			$(UTILS_DIR)/utils.hpp		\
+
+# =================== Rules ===================
+all: compile $(NAME)
+
+define status
+	@echo "--------------------------------------------------------------------"
+	@echo "$(2)>>> $(1) ${RST}"
+	@echo "--------------------------------------------------------------------"
+endef
+
+$(NAME): $(OBJ)
+	$(call status,🟢 Linking object files..., $(GREEN))
+	$(CC) $(CXXFLAGS) $(OBJ) -o $(NAME)
+	@echo ""
+
+# Pattern rule for all .cpp files, including utils
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp $(HEADERS)
+	@mkdir -p $(OBJ_DIR)
+	$(CC) $(CXXFLAGS) -I$(INC_DIR) -I$(UTILS_DIR) -c $< -o $@
+
+$(OBJ_DIR)/%.o: $(UTILS_DIR)/%.cpp $(HEADERS)
+	@mkdir -p $(OBJ_DIR)
+	$(CC) $(CXXFLAGS) -I$(INC_DIR) -I$(UTILS_DIR) -c $< -o $@
+
+compile:
+	@mkdir -p $(OBJ_DIR)
+	$(call status,🟢 Compiling all source files..., $(GREEN))
+	@$(MAKE) $(OBJ) --no-print-directory
+
+clean:
+	$(call status,🟡 Cleaning object files..., $(YELLOW))
+	rm -rf $(OBJ_DIR)
+	@echo ""
+
+fclean: clean
+	$(call status,🟡 Removing binary..., $(YELLOW))
+	rm -f $(NAME)
+	@echo ""
+
+re: fclean all
+
+.PHONY: all clean fclean re
