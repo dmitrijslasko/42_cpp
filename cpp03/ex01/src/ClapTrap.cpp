@@ -1,11 +1,15 @@
 #include "ClapTrap.hpp"
 
+const int ClapTrap::DEFAULT_HP = 10;
+const int ClapTrap::DEFAULT_EP = 10;
+const int ClapTrap::DEFAULT_AD = 0;
+
 // Constructor (default)
 ClapTrap::ClapTrap()
 	: _name("default"),
-	  _hitPoints(10),
-	  _energyPoints(10),
-	  _attackDamage(0)
+	  _hitPoints(DEFAULT_HP),
+	  _energyPoints(DEFAULT_EP),
+	  _attackDamage(DEFAULT_AD)
 {
 	std::cout << ">>> ClapTrap default constructor called" << std::endl;
 }
@@ -13,9 +17,9 @@ ClapTrap::ClapTrap()
 // Constructor (parameterized)
 ClapTrap::ClapTrap(std::string name)
 	: _name(name),
-	  _hitPoints(10),
-	  _energyPoints(10),
-	  _attackDamage(0)
+	  _hitPoints(DEFAULT_HP),
+	  _energyPoints(DEFAULT_EP),
+	  _attackDamage(DEFAULT_AD)
 {
 	std::cout 	<< ">>> ClapTrap parameterized constructor called: "
 				<< _name << " "
@@ -52,16 +56,22 @@ ClapTrap::~ClapTrap() {
 
 // Public methods
 void ClapTrap::attack(const std::string& target) {
-	if (this->_energyPoints > 0 && this->_hitPoints > 0) {
-		this->_energyPoints--;
-		std::cout << B_YELLOW;
-		std::cout << "ClapTrap " << _name << " attacks " << target << ", causing " << _attackDamage << " points of damage! Energy points: " << _energyPoints << "\n";
-		std::cout << RESET;
-	}
-	else if (this->_energyPoints == 0)
+
+	if (this->_energyPoints == 0) {
 		std::cout << "ClapTrap " << _name << " can't attack " << target << ": not enough energy points!\n";
-	else
+		return ;
+	}
+
+	if (this->_hitPoints == 0) {
 		std::cout << "ClapTrap " << _name << " can't attack " << target << ": not enough hit points!\n";
+		return ;
+	}
+
+	this->_energyPoints--;
+	std::cout << B_YELLOW;
+	std::cout << "ClapTrap " << _name << " attacks " << target << ", causing " << _attackDamage << " points of damage! "
+				<< "Energy points: " << _energyPoints << "\n";
+	std::cout << RESET;
 }
 
 void ClapTrap::takeDamage(unsigned int amount) {

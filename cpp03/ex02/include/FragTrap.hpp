@@ -1,5 +1,5 @@
-#ifndef FRAGTRAP_H
-# define FRAGTRAP_H
+#ifndef FRAGTRAP_HPP
+# define FRAGTRAP_HPP
 
 # include "ClapTrap.hpp"
 
@@ -7,6 +7,10 @@ class FragTrap : public ClapTrap {
 
 	private:
 		bool _guardGateMode;
+
+		static const int DEFAULT_HP;
+		static const int DEFAULT_EP;
+		static const int DEFAULT_AD;
 
 	public:
 		FragTrap();

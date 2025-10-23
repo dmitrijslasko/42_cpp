@@ -10,12 +10,12 @@ void	printSeparator( void ) {
 int	main ( void ) {
 	{
 		printSeparator();
-		cout << "DEFAULT CONSTRUCTOR\n";
+		cout << B_CYAN << "DEFAULT CONSTRUCTOR\n" << RESET;
 		ClapTrap	unnamed = ClapTrap();
 	}
 	{
 		printSeparator();
-		cout << "PARAMETERIZED CONSTRUCTOR\n";
+		cout << B_CYAN << "PARAMETERIZED CONSTRUCTOR\n" << RESET;
 		ClapTrap	johnhy("Johnny");
 
 		for (int i = 0; i < 15; i++)
@@ -26,17 +26,18 @@ int	main ( void ) {
 		johnhy.takeDamage(15);
 		johnhy.takeDamage(15);
 		johnhy.takeDamage(15);
+		johnhy.attack("Jimmy");
 		johnhy.beRepaired(15);
 	}
 	{
 		printSeparator();
-		cout << "COPY CONSTRUCTOR\n";
+		cout << B_CYAN << "COPY CONSTRUCTOR\n" << RESET;
 		ClapTrap	johnhy("Johny");
 		ClapTrap	jimmy(johnhy);
 	}
 	{
 		printSeparator();
-		cout << "COPY ASSIGNMENT OPERATOR\n";
+		cout << B_CYAN << "COPY ASSIGNMENT OPERATOR\n" << RESET;
 		ClapTrap	johnhy("Johny");
 		ClapTrap	jimmy;
 		jimmy = johnhy;

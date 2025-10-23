@@ -1,5 +1,5 @@
-#ifndef CLAPTRAP_H
-# define CLAPTRAP_H
+#ifndef CLAPTRAP_HPP
+# define CLAPTRAP_HPP
 
 # include <string>
 # include <iostream>
@@ -15,6 +15,10 @@ class ClapTrap {
 		unsigned int	_energyPoints;
 		// Attack damage (0)
 		unsigned int	_attackDamage;
+
+		static const int DEFAULT_HP;
+		static const int DEFAULT_EP;
+		static const int DEFAULT_AD;
 
 	public:
 		// Constructor (default)

@@ -1,12 +1,16 @@
-#ifndef SCAVTRAP_H
-# define SCAVTRAP_H
+#ifndef SCAVTRAP_HPP
+# define SCAVTRAP_HPP
 
 # include "ClapTrap.hpp"
 
 class ScavTrap : public ClapTrap {
 
 	private:
-		bool _guardGateMode;
+		bool _guardModeOn;
+
+		static const int DEFAULT_HP;
+		static const int DEFAULT_EP;
+		static const int DEFAULT_AD;
 
 	public:
 		ScavTrap();
