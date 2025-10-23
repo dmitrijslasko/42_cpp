@@ -1,33 +1,20 @@
-#ifndef CAT_H
-# define CAT_H
-
-# include <string>
-# include <iostream>
+#ifndef CAT_HPP
+# define CAT_HPP
 
 # include "Animal.hpp"
 
 class Cat : public Animal {
 
 	private:
-	
+
 	public:
-		// Constructor (default)
 		Cat();
-
-		// Constructor (parameterized)
-		Cat(std::string type);
-
-		// Copy constructor
+		//Cat(std::string type);
 		Cat(const Cat &other);
-
-		// Copy assignment operator
 		Cat &operator=(const Cat &other);
-
-		// Destructor
 		~Cat();
 
-		// Public methods
-		void makeSound( void );
+		void makeSound( void ) const;
 };
 
 #endif

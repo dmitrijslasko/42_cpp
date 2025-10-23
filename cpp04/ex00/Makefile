@@ -15,50 +15,53 @@ NAME = main
 SRC_DIR = src
 OBJ_DIR = obj
 INC_DIR = include
+UTILS_DIR = ../utils
 
-SRC = 	$(SRC_DIR)/main.cpp \
-		$(SRC_DIR)/Animal.cpp \
-		$(SRC_DIR)/Dog.cpp \
-		$(SRC_DIR)/Cat.cpp \
+SRC = 	$(SRC_DIR)/main.cpp 		\
+		$(SRC_DIR)/Animal.cpp 		\
+		$(SRC_DIR)/Dog.cpp			\
+		$(SRC_DIR)/Cat.cpp 			\
+		$(SRC_DIR)/WrongAnimal.cpp 	\
+		$(SRC_DIR)/WrongCat.cpp 	\
+		$(UTILS_DIR)/utils.cpp		\
 
-OBJ = $(SRC:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
+# Convert all .cpp to .o inside obj folder (regardless of location)
+OBJ = $(patsubst %.cpp,$(OBJ_DIR)/%.o,$(notdir $(SRC)))
 
-HEADERS = 	$(INC_DIR)/Animal.hpp	\
-			$(INC_DIR)/Dog.hpp	\
-			$(INC_DIR)/Cat.hpp	\
+HEADERS = 	$(INC_DIR)/Animal.hpp		\
+			$(INC_DIR)/Dog.hpp			\
+			$(INC_DIR)/Cat.hpp			\
+			$(INC_DIR)/WrongAnimal.hpp	\
+			$(INC_DIR)/WrongCat.hpp		\
+			$(UTILS_DIR)/utils.hpp		\
 
 # =================== Rules ===================
 all: compile $(NAME)
 
-# Function for status messages
 define status
 	@echo "--------------------------------------------------------------------"
 	@echo "$(2)>>> $(1) ${RST}"
 	@echo "--------------------------------------------------------------------"
 endef
 
-# Linking
 $(NAME): $(OBJ)
 	$(call status,🟢 Linking object files..., $(GREEN))
 	$(CC) $(CXXFLAGS) $(OBJ) -o $(NAME)
 	@echo ""
 
-# Compilation
+# Pattern rule for all .cpp files, including utils
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp $(HEADERS)
 	@mkdir -p $(OBJ_DIR)
-	$(call status,🟢 Compiling $< ..., $(GREEN))
-	$(CC) $(CXXFLAGS) -I$(INC_DIR) -c $< -o $@
-	@echo ""
+	$(CC) $(CXXFLAGS) -I$(INC_DIR) -I$(UTILS_DIR) -c $< -o $@
 
-# Compilation
+$(OBJ_DIR)/%.o: $(UTILS_DIR)/%.cpp $(HEADERS)
+	@mkdir -p $(OBJ_DIR)
+	$(CC) $(CXXFLAGS) -I$(INC_DIR) -I$(UTILS_DIR) -c $< -o $@
+
 compile:
 	@mkdir -p $(OBJ_DIR)
-	$(call status, 🟢 Compiling all source files..., $(GREEN))
+	$(call status,🟢 Compiling all source files..., $(GREEN))
 	@$(MAKE) $(OBJ) --no-print-directory
-
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp $(HEADERS)
-	@printf "Compiling %-20s → %-20s\n" "$<" "$@"
-	@$(CC) $(CXXFLAGS) -I$(INC_DIR) -c $< -o $@
 
 clean:
 	$(call status,🟡 Cleaning object files..., $(YELLOW))

@@ -1,33 +1,20 @@
-#ifndef DOG_H
-# define DOG_H
-
-# include <string>
-# include <iostream>
+#ifndef DOG_HPP
+# define DOG_HPP
 
 # include "Animal.hpp"
 
 class Dog : public Animal {
 
 	private:
-	
+
 	public:
-		// Constructor (default)
 		Dog();
-
-		// Constructor (parameterized)
-		Dog(std::string type);
-
-		// Copy constructor
+		//Dog(std::string type);
 		Dog(const Dog &other);
-
-		// Copy assignment operator
 		Dog &operator=(const Dog &other);
-
-		// Destructor
 		~Dog();
 
-		// Public methods
-		void makeSound( void );
+		void makeSound( void ) const;
 };
 
 #endif
