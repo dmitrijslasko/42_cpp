@@ -6,7 +6,6 @@
 class FragTrap : public ClapTrap {
 
 	private:
-		bool _guardGateMode;
 
 		static const int DEFAULT_HP;
 		static const int DEFAULT_EP;

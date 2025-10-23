@@ -38,6 +38,7 @@ ClapTrap::ClapTrap(const ClapTrap &other)
 {
 	std::cout << ">>> ClapTrap copy constructor called for " << _name << std::endl;
 }
+
 ClapTrap &ClapTrap::operator=(const ClapTrap &other) {
 	std::cout << ">>> ClapTrap copy assignment operator called" << std::endl;
 	if (this != &other) {
