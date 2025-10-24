@@ -8,6 +8,7 @@ RST    = \033[0m
 CC = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 CXXFLAGS += -Wold-style-cast -Wdeprecated-declarations -Wpedantic
+CXXFLAGS += -MMD -MP
 
 # =================== Project ===================
 NAME = main
@@ -28,13 +29,6 @@ SRC = 	$(SRC_DIR)/main.cpp 		\
 # Convert all .cpp to .o inside obj folder (regardless of location)
 OBJ = $(patsubst %.cpp,$(OBJ_DIR)/%.o,$(notdir $(SRC)))
 
-HEADERS = 	$(INC_DIR)/Animal.hpp		\
-			$(INC_DIR)/Dog.hpp			\
-			$(INC_DIR)/Cat.hpp			\
-			$(INC_DIR)/WrongAnimal.hpp	\
-			$(INC_DIR)/WrongCat.hpp		\
-			$(UTILS_DIR)/utils.hpp		\
-
 # =================== Rules ===================
 all: compile $(NAME)
 
@@ -49,14 +43,17 @@ $(NAME): $(OBJ)
 	$(CC) $(CXXFLAGS) $(OBJ) -o $(NAME)
 	@echo ""
 
-# Pattern rule for all .cpp files, including utils
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp $(HEADERS)
+# Pattern rule for source files
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CXXFLAGS) -I$(INC_DIR) -I$(UTILS_DIR) -c $< -o $@
 
-$(OBJ_DIR)/%.o: $(UTILS_DIR)/%.cpp $(HEADERS)
+$(OBJ_DIR)/%.o: $(UTILS_DIR)/%.cpp
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CXXFLAGS) -I$(INC_DIR) -I$(UTILS_DIR) -c $< -o $@
+
+# Auto-include generated dependency files (.d)
+-include $(OBJ:.o=.d)
 
 compile:
 	@mkdir -p $(OBJ_DIR)

@@ -4,38 +4,42 @@
 #include "Cat.hpp"
 #include "utils.hpp"
 
+#define ARRAY_SIZE 10
+
 int	main ( void ) {
-	{
-		printSeparator();
-		std::cout << B_GREEN << "✅ CORRECT BEHAVIOUR WITH VIRTUAL KEYWORD\n" << RESET;
-		const Animal* meta = new Animal();
-		const Animal* j = new Dog();
-		const Animal* i = new Cat();
-		std::cout << i->getType() << " " << std::endl;
-		i->makeSound(); //will output the cat sound!
-		std::cout << j->getType() << " " << std::endl;
-		j->makeSound();
-		meta->makeSound();
-		//return 0;
-	}
-	{
-		printSeparator();
-		Animal animal;
-		animal.makeSound();
-		std::cout << "Instance type: " << animal.getType() << std::endl;
-	}
-	{
-		printSeparator();
-		Dog dog;
-		dog.makeSound();
-		std::cout << "Instance type: " << dog.getType() << std::endl;
-	}
-	{
-		printSeparator();
-		Cat cat;
-		cat.makeSound();
-		std::cout << "Instance type: " << cat.getType() << std::endl;
-	}
-	printSeparator();
+	//Animal* animals[ARRAY_SIZE];
+
+	//std::cout << "\nCREATING DOGS AND CATS" << std::endl;
+	//printSeparator();
+	//for (int i = 0; i < ARRAY_SIZE / 2; i++)
+	//	animals[i] = new Dog();
+	//for (int i = ARRAY_SIZE / 2; i < ARRAY_SIZE; i++)
+	//	animals[i] = new Cat();
+
+	//std::cout << "\nMAKING SOUNDS" << std::endl;
+	//printSeparator();
+	//for (int i = 0; i < ARRAY_SIZE; i++) {
+	//	animals[i]->makeSound();
+	//}
+
+	//std::cout << "\nDELETION" << std::endl;
+	//printSeparator();
+	//for (int i = 0; i < ARRAY_SIZE; i++) {
+	//	std::cout << i << " -------------------------------------" << std::endl;
+	//	delete animals[i];
+	//}
+
+	Dog dog1;
+	dog1.addNewIdea("I am a dog");
+
+	std::cout << "Creating a new dog instance using a copy constructor\n";
+	Dog dog2 = Dog(dog1);
+
+	std::cout << "Overwrting the new dog's idea\n";
+	dog2.addNewIdea("I am a cat");
+
+	dog1.printAllIdeas();
+	dog2.printAllIdeas();
+
 	return 0;
 }

@@ -30,9 +30,9 @@ Animal::~Animal() {
 }
 
 // Public methods
-void Animal::makeSound( void ) const {
-	std::cout << B_YELLOW << "🐒 Making a generic animal sound. He he!" << RESET << std::endl;
-}
+//void Animal::makeSound( void ) const {
+//	std::cout << B_YELLOW << "🐒 Making a generic animal sound. He he!" << RESET << std::endl;
+//}
 
 std::string	Animal::getType( void ) const {
 	return _type;
