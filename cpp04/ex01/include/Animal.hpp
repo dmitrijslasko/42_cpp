@@ -8,7 +8,7 @@
 class Animal {
 
 	protected:
-		std::string	_type;
+		std::string	type_;
 
 	public:
 		Animal();
@@ -19,5 +19,10 @@ class Animal {
 		virtual void makeSound( void ) const;
 		std::string	getType( void ) const;
 };
+
+//✅ Rule of thumb
+//If a class has any virtual function (like makeSound()),
+//it should also have a virtual destructor.
+
 
 #endif

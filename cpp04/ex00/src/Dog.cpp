@@ -3,7 +3,7 @@
 // Constructor (default)
 Dog::Dog() {
 	std::cout << ">> 🐶 Dog default constructor\n";
-	_type = "Dog";
+	type_ = "Dog";
 }
 
 //// Constructor (parameterized)
@@ -19,7 +19,7 @@ Dog::Dog(const Dog &other) : Animal(other) {
 // Copy assignment operator
 Dog &Dog::operator=(const Dog &other) {
 	if (this != &other)
-		_type = other._type;
+		type_ = other.type_;
 	return *this;
 	std::cout << ">> 🐶 Dog copy assignment operator\n";
 }

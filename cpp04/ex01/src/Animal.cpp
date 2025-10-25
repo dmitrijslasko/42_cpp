@@ -3,7 +3,7 @@
 // Constructor (default)
 Animal::Animal() {
 	std::cout << ">>> 🐒 Animal default constructor\n";
-	_type = "Generic animal";
+	type_ = "Generic animal";
 }
 
 ////// Constructor (parameterized)
@@ -12,7 +12,7 @@ Animal::Animal() {
 //}
 
 // Copy constructor
-Animal::Animal(const Animal &other) : _type(other._type)	{
+Animal::Animal(const Animal &other) : type_(other.type_)	{
 	std::cout << ">>> 🐒 Animal copy constructor\n";
 }
 
@@ -20,7 +20,7 @@ Animal::Animal(const Animal &other) : _type(other._type)	{
 Animal &Animal::operator=(const Animal &other) {
 	std::cout << ">>> 🐒 Animal copy assignment operator\n";
 	if (this != &other)
-		_type = other._type;
+		type_ = other.type_;
 	return *this;
 }
 
@@ -35,6 +35,6 @@ void Animal::makeSound( void ) const {
 }
 
 std::string	Animal::getType( void ) const {
-	return _type;
+	return type_;
 }
 

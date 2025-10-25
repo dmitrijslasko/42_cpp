@@ -3,7 +3,7 @@
 // Constructor (default)
 WrongAnimal::WrongAnimal() {
 	std::cout << ">>> 🐒 WrongAnimal default constructor\n";
-	_type = "Generic WrongAnimal";
+	type_ = "Generic WrongAnimal";
 }
 
 //// Constructor (parameterized)
@@ -12,7 +12,7 @@ WrongAnimal::WrongAnimal() {
 //}
 
 // Copy constructor
-WrongAnimal::WrongAnimal(const WrongAnimal &other) : _type(other._type)	{
+WrongAnimal::WrongAnimal(const WrongAnimal &other) : type_(other.type_)	{
 	std::cout << ">>> 🐒 WrongAnimal copy constructor\n";
 }
 
@@ -20,7 +20,7 @@ WrongAnimal::WrongAnimal(const WrongAnimal &other) : _type(other._type)	{
 WrongAnimal &WrongAnimal::operator=(const WrongAnimal &other) {
 	std::cout << ">>> 🐒 WrongAnimal copy assignment operator\n";
 	if (this != &other)
-		_type = other._type;
+		type_ = other.type_;
 	return *this;
 }
 
@@ -35,5 +35,5 @@ void WrongAnimal::makeSound( void ) const {
 }
 
 std::string	WrongAnimal::getType( void ) const {
-	return _type;
+	return type_;
 }

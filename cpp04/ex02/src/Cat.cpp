@@ -2,9 +2,9 @@
 #include "Brain.hpp"
 
 // Constructor (default)
-Cat::Cat() : _brain(new Brain()) {
+Cat::Cat() : brain_(new Brain()) {
 	std::cout << ">> 🐱 Cat default constructor\n";
-	_type = "Cat";
+	type_ = "Cat";
 }
 
 //// Constructor (parameterized)
@@ -15,14 +15,14 @@ Cat::Cat() : _brain(new Brain()) {
 // Copy constructor
 Cat::Cat(const Cat &other) : Animal(other) {
 	std::cout << ">> 🐱 Cat copy constructor\n";
-	_brain = new Brain(*other._brain); // 👈 Deep copy
+	brain_ = new Brain(*other.brain_); // 👈 Deep copy
 }
 
 // Copy assignment operator
 Cat &Cat::operator=(const Cat &other) {
 	if (this != &other) {
-		_type = other._type;
-		*_brain = *other._brain;
+		type_ = other.type_;
+		*brain_ = *other.brain_;
 	}
 	return *this;
 	std::cout << ">> 🐱 Cat copy assignment operator\n";
@@ -31,7 +31,7 @@ Cat &Cat::operator=(const Cat &other) {
 // Destructor
 Cat::~Cat() {
 	std::cout << ">> 🐱 Cat class destructor\n";
-	delete _brain;
+	delete brain_;
 }
 
 // Public methods

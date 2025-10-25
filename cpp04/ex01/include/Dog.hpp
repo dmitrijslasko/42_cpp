@@ -7,7 +7,7 @@
 class Dog : public Animal {
 
 	private:
-		Brain *_brain;
+		Brain *brain_;
 
 	public:
 		Dog();
@@ -19,6 +19,7 @@ class Dog : public Animal {
 
 		void addNewIdea(std::string idea);
 		void printAllIdeas() const;
+		int getIdeaCount() const;
 };
 
 #endif

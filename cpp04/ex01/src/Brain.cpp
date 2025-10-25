@@ -3,7 +3,7 @@
 // Constructor (default)
 Brain::Brain() {
 	std::cout << ">> 🧠 Brain default constructor\n";
-	_idea_count = 0;
+	idea_count_ = 0;
 }
 
 //// Constructor (parameterized)
@@ -15,7 +15,7 @@ Brain::Brain() {
 Brain::Brain(const Brain &other) {
 	std::cout << ">> 🧠 Brain copy constructor\n";
 	for (int i = 0; i < IDEAS_COUNT; i++)
-		_ideas[i] = other._ideas[i];
+		ideas_[i] = other.ideas_[i];
 }
 
 // Copy assignment operator
@@ -24,7 +24,7 @@ Brain &Brain::operator=(const Brain &other) {
 	if (this != &other)
 	{
 		 for (int i = 0; i < IDEAS_COUNT; i++)
-            _ideas[i] = other._ideas[i];
+            ideas_[i] = other.ideas_[i];
 	}
 	return *this;
 }
@@ -39,7 +39,9 @@ void Brain::setIdea(int index, std::string idea) {
 		std::cout << "Not a good index!" << std::endl;
 		return ;
 	}
-	_ideas[index] = idea;
+	ideas_[index] = idea;
+	idea_count_++;
+	idea_count_ %= 100;
 }
 
 std::string Brain::getIdea(int index) const {
@@ -47,6 +49,12 @@ std::string Brain::getIdea(int index) const {
 		std::cout << "Not a good index!" << std::endl;
 		return "NOT A GOOD INDEX";
 	}
-	return _ideas[index];
+	return ideas_[index];
 }
+
+int Brain::getIdeaCount() const {
+	return idea_count_;
+}
+
+
 

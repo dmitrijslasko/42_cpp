@@ -3,7 +3,7 @@
 // Constructor (default)
 Cat::Cat() {
 	std::cout << ">> 🐱 Cat default constructor\n";
-	_type = "Cat";
+	type_ = "Cat";
 }
 
 //// Constructor (parameterized)
@@ -19,7 +19,7 @@ Cat::Cat(const Cat &other) : Animal(other) {
 // Copy assignment operator
 Cat &Cat::operator=(const Cat &other) {
 	if (this != &other)
-		_type = other._type;
+		type_ = other.type_;
 	return *this;
 	std::cout << ">> 🐱 Cat copy assignment operator\n";
 }

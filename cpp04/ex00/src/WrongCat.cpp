@@ -3,7 +3,7 @@
 // Constructor (default)
 WrongCat::WrongCat() {
 	std::cout << ">> 🐱 WrongCat default constructor\n";
-	_type = "WrongCat";
+	type_ = "WrongCat";
 }
 
 //// Constructor (parameterized)
@@ -19,7 +19,7 @@ WrongCat::WrongCat(const WrongCat &other) : WrongAnimal(other) {
 // Copy assignment operator
 WrongCat &WrongCat::operator=(const WrongCat &other) {
 	if (this != &other)
-		_type = other._type;
+		type_ = other.type_;
 	return *this;
 	std::cout << ">> 🐱 WrongCat copy assignment operator\n";
 }

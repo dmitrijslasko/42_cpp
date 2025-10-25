@@ -2,9 +2,9 @@
 #include "Brain.hpp"
 
 // Constructor (default)
-Dog::Dog() : _brain(new Brain()) {
+Dog::Dog() : brain_(new Brain()) {
 	std::cout << ">> 🐶 Dog default constructor\n";
-	_type = "Dog";
+	type_ = "Dog";
 }
 
 //// Constructor (parameterized)
@@ -15,15 +15,15 @@ Dog::Dog() : _brain(new Brain()) {
 // Copy constructor
 Dog::Dog(const Dog &other) : Animal(other) {
 	std::cout << ">> 🐶 Dog copy constructor\n";
-		_brain = new Brain(*other._brain); // 👈 Deep copy
+		brain_ = new Brain(*other.brain_); // 👈 Deep copy
 }
 
 // Copy assignment operator
 Dog &Dog::operator=(const Dog &other) {
 	std::cout << ">> 🐶 Dog copy assignment operator\n";
 	if (this != &other) {
-		_type = other._type;
-		*_brain = *other._brain;
+		type_ = other.type_;
+		*brain_ = *other.brain_;
 	}
 	return *this;
 }
@@ -31,7 +31,7 @@ Dog &Dog::operator=(const Dog &other) {
 // Destructor
 Dog::~Dog() {
 	std::cout << ">> 🐶 Dog class destructor\n";
-	delete _brain;
+	delete brain_;
 }
 
 // Public methods
@@ -41,14 +41,18 @@ void Dog::makeSound( void ) const {
 
 
 void Dog::addNewIdea(std::string idea) {
-	this->_brain->setIdea(0, idea);
+	this->brain_->setIdea(this->getIdeaCount(), idea);
 }
 
 void Dog::printAllIdeas() const {
 	for (int i = 0; i < IDEAS_COUNT; i++) {
-		std::string idea = this->_brain->getIdea(i);
+		std::string idea = this->brain_->getIdea(i);
 		if (idea == "")
 			break ;
 		std::cout << idea << std::endl;
 	}
 }
+
+int Dog::getIdeaCount() const {
+	return this->brain_->getIdeaCount();
+	}

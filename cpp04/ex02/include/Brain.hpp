@@ -11,8 +11,8 @@
 class Brain {
 
 	private:
-		std::string		_ideas[IDEAS_COUNT];
-		size_t			_idea_count;
+		std::string		ideas_[IDEAS_COUNT];
+		size_t			idea_count_;
 
 	public:
 		Brain();
