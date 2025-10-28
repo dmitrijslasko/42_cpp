@@ -1,4 +1,5 @@
 #include <iostream>
+
 #include "Bureaucrat.hpp"
 #include "utils.hpp"
 
@@ -12,16 +13,8 @@ int	main ( void ) {
 			std::cerr << e.what() << std::endl;
 		}
 		Bureaucrat c("Mr Johns", 90);
+		c.signForm();
 		std::cout << c << std::endl;
-	}
-	{
-		printSeparator();
-		Bureaucrat bureaucrats[20];
-		bureaucrats[5].incrementGrade(10);
-		for (int i = 0; i < 20; i++)
-		{
-			std::cout << bureaucrats[i];
-		}
 	}
 	printSeparator();
 	return 0;

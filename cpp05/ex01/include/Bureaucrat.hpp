@@ -1,5 +1,5 @@
-#ifndef BUREAUCRAT_HPP
-# define BUREAUCRAT_HPP
+#ifndef FORM_HPP
+# define FORM_HPP
 
 # include <string>
 # include <iostream>
@@ -39,6 +39,8 @@ class Bureaucrat {
 
 		void incrementGrade( int amount );
 		void decrementGrade( int amount );
+
+		int signForm( void );
 };
 
 std::ostream &operator<<(std::ostream & os, Bureaucrat const &other);
