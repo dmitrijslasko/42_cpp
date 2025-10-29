@@ -12,3 +12,12 @@ void	printSeparator( void ) {
 		out += SEPARATOR_CHAR;
 	std::cout << CYAN << out << RESET << std::endl;
 }
+
+void	printTestHeader(std::string test_name)
+{
+	static int test_number = 1;
+	printSeparator();
+	std::cout << B_YELLOW;
+	std::cout << "(" << test_number++ << ") " << test_name << std::endl;
+	std::cout << RESET;
+}
