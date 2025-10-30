@@ -1,5 +1,5 @@
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 
 void printFullInfo(const Bureaucrat &bureaucrat) {
 	std::cout << " name_: \"" << bureaucrat.getName();;
@@ -77,7 +77,7 @@ std::ostream &operator<<(std::ostream &os, Bureaucrat const &other) {
 	return (os);
 }
 
-int Bureaucrat::signForm( Form &form ) {
+int Bureaucrat::signForm( AForm &form ) {
 	try {
 		form.beSigned(*this);
 		setColor(GREEN);

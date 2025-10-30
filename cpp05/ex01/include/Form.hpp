@@ -1,10 +1,12 @@
-#ifndef BUREAUCRAT_HPP
-# define BUREAUCRAT_HPP
+#ifndef FORM_HPP
+# define FORM_HPP
 
 # include <string>
 # include <iostream>
-# include "Bureaucrat.hpp"
+//# include "Bureaucrat.hpp"
 # include "utils.hpp"
+
+class Bureaucrat;
 
 class Form {
 

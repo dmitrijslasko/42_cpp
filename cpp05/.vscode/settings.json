@@ -64,6 +64,8 @@
 		"ratio": "cpp",
 		"stack": "cpp",
 		"variant": "cpp",
-		"__assertion_handler": "cpp"
+		"__assertion_handler": "cpp",
+		"cinttypes": "cpp",
+		"fstream": "cpp"
 	}
 }

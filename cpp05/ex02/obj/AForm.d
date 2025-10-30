@@ -1,7 +1,7 @@
-obj/Form.o: src/Form.cpp include/Form.hpp ../utils/utils.hpp \
+obj/AForm.o: src/AForm.cpp include/AForm.hpp ../utils/utils.hpp \
   ../utils/colors.hpp include/Bureaucrat.hpp
 
-include/Form.hpp:
+include/AForm.hpp:
 
 ../utils/utils.hpp:
 

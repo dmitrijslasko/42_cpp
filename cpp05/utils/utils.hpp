@@ -4,6 +4,8 @@
 #include "colors.hpp"
 
 void	printSeparator( void );
+void	setColor (const std::string color);
+void	resetColor ( void );
 void	printTestHeader(std::string test_name);
 void	expect(const std::string &msg);
 

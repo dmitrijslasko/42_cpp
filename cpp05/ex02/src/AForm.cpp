@@ -1,9 +1,9 @@
-#include "Form.hpp"
+#include "AForm.hpp"
 #include "Bureaucrat.hpp"
 
 #define EMOJI_CHAR "📝"
 
-void printFullInfo(const Form &form) {
+void printFullInfo(const AForm &form) {
 	std::cout << " name_: \"" << form.getName();;
 	std::cout << "\"; isSigned_: " << form.getIsSigned();
 	std::cout << "\"; gradeToSign_: " << form.getGradeToSign();
@@ -12,18 +12,18 @@ void printFullInfo(const Form &form) {
 }
 
 // Constructor (default)
-Form::Form()
+AForm::AForm()
 	: name_("<Unnamed>"),
 	isSigned_(false),
 	gradeToSign_(1),
 	gradeToExecute_(1)
 	{
-	std::cout << ">>> " << EMOJI_CHAR << " ✅ Form DEFAULT constructor.";
+	std::cout << ">>> " << EMOJI_CHAR << " ✅ AForm DEFAULT constructor.";
 	printFullInfo(*this);
 }
 
 // Constructor (parameterized)
-Form::Form(const std::string &name, int gradeToSign, int gradeToExecute)
+AForm::AForm(const std::string &name, int gradeToSign, int gradeToExecute)
 	: name_(name),
 	isSigned_(false),
 	gradeToSign_(gradeToSign),
@@ -37,24 +37,24 @@ Form::Form(const std::string &name, int gradeToSign, int gradeToExecute)
 		throw GradeTooLowException();
 	if (gradeToExecute < 1)
 		throw GradeTooLowException();
-	std::cout << ">>> " << EMOJI_CHAR << " ✅ Form PARAMETERIZED constructor.";
+	std::cout << ">>> " << EMOJI_CHAR << " ✅ AForm PARAMETERIZED constructor.";
 	printFullInfo(*this);
 }
 
 // Copy constructor
-Form::Form(const Form &other)
+AForm::AForm(const AForm &other)
 	: name_(other.name_),
 	isSigned_(other.isSigned_),
 	gradeToSign_(other.gradeToSign_),
 	gradeToExecute_(other.gradeToExecute_)
 {
-	std::cout << ">>> " << EMOJI_CHAR << " ✅ Form COPY constructor.";
+	std::cout << ">>> " << EMOJI_CHAR << " ✅ AForm COPY constructor.";
 	printFullInfo(*this);
 }
 
 // Copy assignment operator
-Form &Form::operator=(const Form &other) {
-	std::cout << ">>> " << EMOJI_CHAR << " Form copy assignment operator.\n";
+AForm &AForm::operator=(const AForm &other) {
+	std::cout << ">>> " << EMOJI_CHAR << " AForm copy assignment operator.\n";
 	if (this != &other) {
 		isSigned_ = other.isSigned_;
 	}
@@ -62,28 +62,28 @@ Form &Form::operator=(const Form &other) {
 }
 
 // Destructor
-Form::~Form() {
-	std::cout << ">>> " << EMOJI_CHAR << " ❌ Form destructor.";
+AForm::~AForm() {
+	std::cout << ">>> " << EMOJI_CHAR << " ❌ AForm destructor.";
 	printFullInfo(*this);
 }
 
-std::string Form::getName( void ) const {
+std::string AForm::getName( void ) const {
 	return name_;
 }
 
-bool Form::getIsSigned( void ) const {
+bool AForm::getIsSigned( void ) const {
 	return isSigned_;
 }
 
-int Form::getGradeToSign( void ) const {
+int AForm::getGradeToSign( void ) const {
 	return gradeToSign_;
 }
 
-int Form::getGradeToExecute( void ) const {
+int AForm::getGradeToExecute( void ) const {
 	return gradeToExecute_;
 }
 
-std::ostream &operator<<(std::ostream &os, Form const &other) {
+std::ostream &operator<<(std::ostream &os, AForm const &other) {
 	os << other.getName();
 	os << ", isSigned: ";
 	os << other.getIsSigned();
@@ -93,7 +93,7 @@ std::ostream &operator<<(std::ostream &os, Form const &other) {
 	return (os);
 }
 
-void Form::beSigned(Bureaucrat &bureaucrat) {
+void AForm::beSigned(const Bureaucrat &bureaucrat) {
 	if (bureaucrat.getGrade() > this->getGradeToSign())
 		throw GradeTooLowException();
 	this->isSigned_ = 1;
@@ -105,12 +105,17 @@ void Form::beSigned(Bureaucrat &bureaucrat) {
 	std::cout << std::endl;
 }
 
-// Exceptions
-const char *Form::GradeTooHighException::what() const throw() {
-	return
-	"\033[31m🔴 Form: EXCEPTION: Grade too high!\033[0m";  // 🔴 red text
+void AForm::beExecuted(const Bureaucrat &bureaucrat) {
+	(void)bureaucrat;
+	std::cout << "FORM IS NOW EXECUTED!" << std::endl;
 }
 
-const char *Form::GradeTooLowException::what() const throw() {
-	return "\033[31m🔴 Form: EXCEPTION: Grade too low!\033[0m";   // 🔴 red text
+// Exceptions
+const char *AForm::GradeTooHighException::what() const throw() {
+	return
+	"\033[31m🔴 AForm: EXCEPTION: Grade too high!\033[0m";  // 🔴 red text
+}
+
+const char *AForm::GradeTooLowException::what() const throw() {
+	return "\033[31m🔴 AForm: EXCEPTION: Grade too low!\033[0m";   // 🔴 red text
 }

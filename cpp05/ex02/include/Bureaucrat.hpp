@@ -4,7 +4,9 @@
 # include <string>
 # include <iostream>
 # include "utils.hpp"
-# include "Form.hpp"
+# include "AForm.hpp"
+
+using std::exception;
 
 class Bureaucrat {
 
@@ -23,13 +25,13 @@ class Bureaucrat {
 		~Bureaucrat();
 
 		// Exceptions
-		class GradeTooHighException : public std::exception
+		class GradeTooHighException : public exception
 		{
 			public:
 				const char *what() const throw();
 		};
 
-		class GradeTooLowException : public std::exception
+		class GradeTooLowException : public exception
 		{
 			public:
 				const char *what() const throw();
@@ -41,7 +43,7 @@ class Bureaucrat {
 		void incrementGrade( int amount );
 		void decrementGrade( int amount );
 
-		int signForm( Form &form );
+		int signForm( AForm &form );
 };
 
 std::ostream &operator<<(std::ostream & os, Bureaucrat const &other);

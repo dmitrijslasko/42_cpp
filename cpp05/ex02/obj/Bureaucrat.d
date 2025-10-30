@@ -1,5 +1,5 @@
 obj/Bureaucrat.o: src/Bureaucrat.cpp include/Bureaucrat.hpp \
-  ../utils/utils.hpp ../utils/colors.hpp include/Form.hpp
+  ../utils/utils.hpp ../utils/colors.hpp include/AForm.hpp
 
 include/Bureaucrat.hpp:
 
@@ -7,4 +7,4 @@ include/Bureaucrat.hpp:
 
 ../utils/colors.hpp:
 
-include/Form.hpp:
+include/AForm.hpp:
