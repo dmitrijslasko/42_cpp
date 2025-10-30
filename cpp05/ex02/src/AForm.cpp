@@ -106,7 +106,7 @@ void AForm::beSigned(const Bureaucrat &bureaucrat) {
 }
 
 void AForm::beExecuted(const Bureaucrat &bureaucrat) {
-	(void)bureaucrat;
+	(void) bureaucrat;
 	std::cout << "FORM IS NOW EXECUTED!" << std::endl;
 }
 

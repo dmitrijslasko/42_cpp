@@ -5,12 +5,19 @@
 #include "utils.hpp"
 
 int	main ( void ) {
-	//AForm f = ShrubberyCreationForm();
-	ShrubberyCreationForm f;
-	Bureaucrat b = Bureaucrat("Tom", 150);
+	{
+		ShrubberyCreationForm f;
+		Bureaucrat b = Bureaucrat("Tom", 1);
+		try {
+			f.beSigned(b);
+			f.beExecuted(b);
+		}
+		catch (const std::exception &e) {
+				std::cerr << e.what() << std::endl;
+		}
 
-	f.beSigned(b);
-	printSeparator();
+		printSeparator();
+	}
 	std::cout << "✅ All tests finished!\n";
 	return 0;
 }
