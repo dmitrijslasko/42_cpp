@@ -7,7 +7,7 @@ void printFullInfo(const Bureaucrat &bureaucrat) {
 }
 
 // Constructor (default)
-Bureaucrat::Bureaucrat() : name_("Generic Bureaucrat"), grade_(Bureaucrat::LOWEST_GRADE) {
+Bureaucrat::Bureaucrat() : name_("<Unnamed> Bureaucrat"), grade_(Bureaucrat::LOWEST_GRADE) {
 	std::cout << ">>> 👔 ✅ Bureaucrat DEFAULT constructor.";
 	printFullInfo(*this);
 }
@@ -57,7 +57,7 @@ void Bureaucrat::incrementGrade( int amount ) {
 	int newGrade = grade_ - amount;
 	if (newGrade < HIGHEST_GRADE)
 		throw GradeTooHighException();
-	std::cout << "Grade for " << name_ << " incremented: " << grade_ << " --> " << newGrade;
+	std::cout << "➕ Grade for " << name_ << " incremented: " << grade_ << " --> " << newGrade;
 	std::cout << std::endl;
 	grade_ = newGrade;
 }
@@ -66,7 +66,7 @@ void Bureaucrat::decrementGrade( int amount ) {
 	int newGrade = grade_ + amount;
 	if (newGrade > LOWEST_GRADE)
 		throw GradeTooLowException();
-	std::cout << "Grade for " << name_ << " decremented: " << grade_ << " --> " << newGrade;
+	std::cout << "➖ Grade for " << name_ << " decremented: " << grade_ << " --> " << newGrade;
 	std::cout << std::endl;
 	grade_ = newGrade;
 }
@@ -78,9 +78,9 @@ std::ostream &operator<<(std::ostream &os, Bureaucrat const &other) {
 
 // Exceptions
 const char *Bureaucrat::GradeTooHighException::what() const throw() {
-	return "\033[31mEXCEPTION: Grade too high!\033[0m";  // 🔴 red text
+	return "\033[31m🔴 EXCEPTION: Grade too high!\033[0m";  // 🔴 red text
 }
 
 const char *Bureaucrat::GradeTooLowException::what() const throw() {
-	return "\033[33mEXCEPTION: Grade too low!\033[0m";   // 🟡 yellow text
+	return "\033[31m🔴 EXCEPTION: Grade too low!\033[0m";   // 🔴 red text
 }

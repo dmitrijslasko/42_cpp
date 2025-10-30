@@ -5,5 +5,6 @@
 
 void	printSeparator( void );
 void	printTestHeader(std::string test_name);
+void	expect(const std::string &msg);
 
 #endif

@@ -14,9 +14,12 @@ class Form {
 		const int			gradeToSign_;
 		const int			gradeToExecute_;
 
+		static const int	HIGHEST_GRADE = 1;
+		static const int	LOWEST_GRADE = 150;
+
 	public:
 		Form();
-		Form(const std::string &name, int isSigned);
+		Form(const std::string &name, int gradeToSign, int gradeToExecute);
 		Form(const Form &other);
 		Form &operator=(const Form &other);
 		~Form();
@@ -37,6 +40,8 @@ class Form {
 
 		std::string 	getName( void ) const;
 		bool			getIsSigned( void ) const;
+		int 			getGradeToSign( void ) const;
+		int 			getGradeToExecute( void ) const;
 
 		void beSigned(Bureaucrat &bureaucrat);
 
