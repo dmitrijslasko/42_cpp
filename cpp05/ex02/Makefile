@@ -22,6 +22,8 @@ SRC =	$(SRC_DIR)/main.cpp 	\
 		$(SRC_DIR)/Bureaucrat.cpp 	\
 		$(SRC_DIR)/AForm.cpp 	\
 		$(SRC_DIR)/ShrubberyCreationForm.cpp 	\
+		$(SRC_DIR)/RobotomyRequestForm.cpp 	\
+		$(SRC_DIR)/PresidentialPardonForm.cpp 	\
 		$(UTILS_DIR)/utils.cpp		\
 
 # Convert all .cpp to .o inside obj folder (regardless of location)

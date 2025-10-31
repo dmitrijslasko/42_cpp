@@ -29,17 +29,21 @@ class AForm {
 		// getters and setters
 		std::string 	getName( void ) const;
 		bool			getIsSigned( void ) const;
+		void 			setIsSigned(bool value);
 
 		int 			getGradeToSign( void ) const;
 		void 			setGradeToSign(const int grade);
 
 		int 			getGradeToExecute( void ) const;
-		
-		
+
+
 
 		// methods
 		void 	beSigned(const Bureaucrat &bureaucrat);
-		virtual void 	beExecuted(const Bureaucrat &bureaucrat) = 0;
+
+		virtual void 	beExecuted(const Bureaucrat &executor) const = 0;
+
+		void execute(Bureaucrat const &executor) const;
 
 				// Exceptions
 		class GradeTooHighException : public std::exception
@@ -53,6 +57,13 @@ class AForm {
 			public:
 				const char *what() const throw();
 		};
+
+		class FormNotSignedException : public std::exception
+		{
+			public:
+				const char *what() const throw();
+		};
+
 
 };
 

@@ -1,4 +1,6 @@
 #include "ShrubberyCreationForm.hpp"
+
+#include <ctime>
 #include <cstdlib>
 
 // Default constructor
@@ -38,48 +40,67 @@ void 	ShrubberyCreationForm::setTarget(const std::string target) {
 	target_ = target;
 }
 
-void ShrubberyCreationForm::beExecuted(const Bureaucrat &bureaucrat) {
+void ShrubberyCreationForm::beExecuted(const Bureaucrat &bureaucrat) const {
+
 	(void) bureaucrat;
-	// std::ifstream src("./tree");
+
+	std::string line;
+	std::string ascii_tree;
+
+	std::ifstream myReadFile("./ascii_tree");
+	while (getline(myReadFile, line)) {
+		ascii_tree += line;
+		ascii_tree += '\n';
+	}
+	myReadFile.close();
+
 	// open file stream in append mode
-	std::ofstream file(target_.c_str(), std::ios::app);
-	system("afplay drill.wav");
+	std::string filename = target_ + "_shrubbery";
+	std::ofstream file((filename).c_str(), std::ios::app);
+	//system("afplay drill.wav");
 
 	if (file.is_open()) {
-		file << SHRUBBERY;
+		file << "----------------------------------------------------\n";
+		std::time_t now = std::time(NULL);
+    	char buf[80];
+    	std::strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", std::localtime(&now));
+		file << "ASCII tree added on " << buf << std::endl;
+		file << ascii_tree;
 		file.close();
-        std::cout << "Appended to " << target_ << std::endl;
+		setColor(B_GREEN);
+		std::cout << "✅ ASCII tree written to file " << filename << std::endl;
+		resetColor();
     } else {
-        std::cerr << "Failed to open " << target_ << std::endl;
+        std::cerr << "Failed to open " << filename << std::endl;
 	}
 }
 
-const std::string ShrubberyCreationForm::SHRUBBERY = 
-"                                                         .			\n \
-											 .         ;  			\n \
-				.              .              ;%     ;;   			\n \
-				  ,           ,                :;%  %;   			\n \
-				   :         ;                   :;%;'     .,   	\n \
-		  ,.        %;     %;            ;        %;'    ,;			\n \
-			;       ;%;  %%;        ,     %;    ;%;    ,%'			\n \
-			 %;       %;%;      ,  ;       %;  ;%;   ,%;' 			\n \
-			  ;%;      %;        ;%;        % ;%;  ,%;'				\n \
-			   `%;.     ;%;     %;'         `;%%;.%;'				\n \
-				`:;%.    ;%%. %@;        %; ;@%;%'					\n \
-				   `:%;.  :;bd%;          %;@%;'					\n \
-					 `@%:.  :;%.         ;@@%;'   					\n \
-					   `@%.  `;@%.      ;@@%;         				\n \
-						 `@%%. `@%%    ;@@%;        				\n \
-						   ;@%. :@%%  %@@%;       					\n \
-							 %@bd%%%bd%%:;     						\n \
-							   #@%%%%%:;;							\n \
-							   %@@%%%::;							\n \
-							   %@@@%(o);  . '         				\n \
-							   %@@@o%;:(.,'         				\n \
-						   `.. %@@@o%::;         					\n \
-							  `)@@@o%::;         					\n \
-							   %@@(o)::;        					\n \
-							  .%@@@@%::;         					\n \
-							  ;%@@@@%::;.          					\n \
-							 ;%@@@@%%:;;;. 							\n \
-						 ...;%@@@@@%%:;;;;,..						\n";
+//const std::string ShrubberyCreationForm::SHRUBBERY =
+//"                                                         .			\n \
+//											 .         ;  			\n \
+//				.              .              ;%     ;;   			\n \
+//				  ,           ,                :;%  %;   			\n \
+//				   :         ;                   :;%;'     .,   	\n \
+//		  ,.        %;     %;            ;        %;'    ,;			\n \
+//			;       ;%;  %%;        ,     %;    ;%;    ,%'			\n \
+//			 %;       %;%;      ,  ;       %;  ;%;   ,%;' 			\n \
+//			  ;%;      %;        ;%;        % ;%;  ,%;'				\n \
+//			   `%;.     ;%;     %;'         `;%%;.%;'				\n \
+//				`:;%.    ;%%. %@;        %; ;@%;%'					\n \
+//				   `:%;.  :;bd%;          %;@%;'					\n \
+//					 `@%:.  :;%.         ;@@%;'   					\n \
+//					   `@%.  `;@%.      ;@@%;         				\n \
+//						 `@%%. `@%%    ;@@%;        				\n \
+//						   ;@%. :@%%  %@@%;       					\n \
+//							 %@bd%%%bd%%:;     						\n \
+//							   #@%%%%%:;;							\n \
+//							   %@@%%%::;							\n \
+//							   %@@@%(o);  . '         				\n \
+//							   %@@@o%;:(.,'         				\n \
+//						   `.. %@@@o%::;         					\n \
+//							  `)@@@o%::;         					\n \
+//							   %@@(o)::;        					\n \
+//							  .%@@@@%::;         					\n \
+//							  ;%@@@@%::;.          					\n \
+//							 ;%@@@@%%:;;;. 							\n \
+//						 ...;%@@@@@%%:;;;;,..						\n";

@@ -75,6 +75,12 @@ bool AForm::getIsSigned( void ) const {
 	return isSigned_;
 }
 
+void	AForm::setIsSigned(bool value) {
+	if (value == false)
+		std::cout << "The form is now unsigned!" << std::endl;
+	isSigned_ = value;
+}
+
 int AForm::getGradeToSign( void ) const {
 	return gradeToSign_;
 }
@@ -94,6 +100,7 @@ std::ostream &operator<<(std::ostream &os, AForm const &other) {
 }
 
 void AForm::beSigned(const Bureaucrat &bureaucrat) {
+	std::cout << "Form signing: " << std::endl;
 	if (bureaucrat.getGrade() > this->getGradeToSign())
 		throw GradeTooLowException();
 	this->isSigned_ = 1;
@@ -105,9 +112,13 @@ void AForm::beSigned(const Bureaucrat &bureaucrat) {
 	std::cout << std::endl;
 }
 
-void AForm::beExecuted(const Bureaucrat &bureaucrat) {
-	(void) bureaucrat;
-	std::cout << "FORM IS NOW EXECUTED!" << std::endl;
+void AForm::execute(const Bureaucrat &executor) const {
+	std::cout << "Form execution: " << std::endl;
+	if (!this->isSigned_)
+		throw FormNotSignedException();
+	if (executor.getGrade() > this->gradeToExecute_)
+		throw GradeTooLowException();
+	this->beExecuted(executor); // 👈 dynamic dispatch happens here
 }
 
 // Exceptions
@@ -119,3 +130,8 @@ const char *AForm::GradeTooHighException::what() const throw() {
 const char *AForm::GradeTooLowException::what() const throw() {
 	return "\033[31m🔴 AForm: EXCEPTION: Grade too low!\033[0m";   // 🔴 red text
 }
+
+const char *AForm::FormNotSignedException::what() const throw() {
+	return "\033[31m🔴 AForm: EXCEPTION: Form not signed!\033[0m";   // 🔴 red text
+}
+

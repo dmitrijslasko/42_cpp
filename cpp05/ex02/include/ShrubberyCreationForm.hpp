@@ -13,7 +13,7 @@ class  ShrubberyCreationForm : public AForm {
 	private:
 		std::string 		target_;
 
-		static const std::string 	SHRUBBERY;
+		//static const std::string 	SHRUBBERY;
 		static const int	SIGN_GRADE = 145;
 		static const int	EXEC_GRADE = 137;
 
@@ -25,8 +25,7 @@ class  ShrubberyCreationForm : public AForm {
 		~ShrubberyCreationForm();
 
 		void 	setTarget(const std::string target);
-		void 	beExecuted(const Bureaucrat &bureaucrat);
-
+		void 	beExecuted(const Bureaucrat &executor) const;
 };
 
 #endif
