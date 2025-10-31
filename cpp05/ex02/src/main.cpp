@@ -10,6 +10,7 @@ int	main ( void ) {
 		Bureaucrat b = Bureaucrat("Tom", 1);
 		try {
 			f.beSigned(b);
+			f.setTarget("testfile");
 			f.beExecuted(b);
 		}
 		catch (const std::exception &e) {

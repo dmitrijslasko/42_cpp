@@ -3,6 +3,7 @@
 
 # include <string>
 # include <iostream>
+# include <fstream>
 
 # include "utils.hpp"
 # include "AForm.hpp"
@@ -23,8 +24,9 @@ class  ShrubberyCreationForm : public AForm {
 		ShrubberyCreationForm &operator=(const ShrubberyCreationForm &other);
 		~ShrubberyCreationForm();
 
+		void 	setTarget(const std::string target);
 		void 	beExecuted(const Bureaucrat &bureaucrat);
-		
+
 };
 
 #endif
