@@ -3,7 +3,6 @@
 #include "utils.hpp"
 
 int	main ( void ) {
-
 	{
 		printTestHeader("Testing DEFAULT constructor");
 		expect("name = '<Unnamed> Bureaucrat', grade = 150");

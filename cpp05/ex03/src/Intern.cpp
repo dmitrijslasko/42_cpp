@@ -57,7 +57,7 @@ AForm* Intern::makeForm(std::string const &formName, std::string const &formTarg
 	for (int i = 0; i < 3; i++) {
 		if (formName == forms[i].name) {
 			setColor(B_GREEN);
-			std::cout << "Intern creates " << formName << "." << std::endl;
+			std::cout << "Intern creates a " << formName << "." << std::endl;
 			resetColor();
 			return (forms[i]).function(formTarget);
 		}

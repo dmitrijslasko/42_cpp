@@ -47,7 +47,7 @@ void ShrubberyCreationForm::beExecuted(const Bureaucrat &bureaucrat) const {
 	std::string line;
 	std::string ascii_tree;
 
-	std::ifstream myReadFile("./ascii_tree");
+	std::ifstream myReadFile("./assets/ascii_tree");
 	while (getline(myReadFile, line)) {
 		ascii_tree += line;
 		ascii_tree += '\n';

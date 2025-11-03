@@ -9,6 +9,7 @@
 int main( void ) {
 	{
 		printTestHeader("Robotomy request - SUCCESS");
+		expect("Intern creates a robotomy request form.");
 		printSeparator();
 		Intern intern;
 		AForm *form;
@@ -17,7 +18,8 @@ int main( void ) {
 		delete form;
 	}
 	{
-		printTestHeader("Shrubbery request - SUCCESS");
+		printTestHeader("Shrubbery creation - SUCCESS");
+		expect("Intern creates a shrubbery creation form.");
 		printSeparator();
 		Intern intern;
 		AForm *form;
@@ -27,6 +29,7 @@ int main( void ) {
 	}
 		{
 		printTestHeader("Presidential pardon - SUCCESS");
+		expect("Intern creates a presidential pardon form.");
 		printSeparator();
 		Intern intern;
 		AForm *form;
@@ -36,6 +39,7 @@ int main( void ) {
 	}
 	{
 		printTestHeader("Unknown form - FAIL");
+		expect("Intern fails to find a respective form.");
 		printSeparator();
 		Intern intern;
 		AForm *form;
