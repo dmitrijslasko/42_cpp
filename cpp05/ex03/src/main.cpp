@@ -7,6 +7,7 @@
 #include "utils.hpp"
 
 int main( void ) {
+	clearTerminal();
 	{
 		printTestHeader("Robotomy request - SUCCESS");
 		expect("Intern creates a robotomy request form.");
@@ -16,6 +17,7 @@ int main( void ) {
 
 		form = intern.makeForm("robotomy request", "Bender");
 		delete form;
+		printSeparator();
 	}
 	{
 		printTestHeader("Shrubbery creation - SUCCESS");
@@ -26,6 +28,7 @@ int main( void ) {
 
 		form = intern.makeForm("shrubbery creation", "Oak");
 		delete form;
+		printSeparator();
 	}
 		{
 		printTestHeader("Presidential pardon - SUCCESS");
@@ -36,6 +39,7 @@ int main( void ) {
 
 		form = intern.makeForm("presidential pardon", "Mister");
 		delete form;
+		printSeparator();
 	}
 	{
 		printTestHeader("Unknown form - FAIL");
@@ -46,6 +50,7 @@ int main( void ) {
 
 		form = intern.makeForm("unknown form", "Target");
 		delete form;
+		printSeparator();
 	}
 	printSeparator();
 	std::cout << "✅ All tests finished!\n";

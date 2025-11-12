@@ -94,7 +94,7 @@ std::ostream &operator<<(std::ostream &os, AForm const &other) {
 	os << ", isSigned: ";
 	os << other.getIsSigned();
 	os << "; Access grades: ";
-	os << " [" << other.getGradeToSign();
+	os << "[" << other.getGradeToSign();
 	os << ", "<< other.getGradeToExecute() << "]";
 	return (os);
 }

@@ -7,6 +7,7 @@
 #include "utils.hpp"
 
 int	main ( void ) {
+	clearTerminal();
 	{
 		printTestHeader("ShrubberyCreation Form test - success");
 		expect("Success: bureaucrat's grade is sufficient to sign the form.");
@@ -22,6 +23,7 @@ int	main ( void ) {
 		catch (const std::exception &e) {
 				std::cerr << e.what() << std::endl;
 		}
+		printSeparator();
 	}
 	{
 		printTestHeader("ShrubberyCreation Form test - fail");
@@ -38,6 +40,7 @@ int	main ( void ) {
 		catch (const std::exception &e) {
 				std::cerr << e.what() << std::endl;
 		}
+		printSeparator();
 	}
 	{
 		printTestHeader("ShrubberyCreation Form test - fail");
@@ -54,6 +57,7 @@ int	main ( void ) {
 		catch (const std::exception &e) {
 				std::cerr << e.what() << std::endl;
 		}
+		printSeparator();
 	}
 	{
 		printTestHeader("RobotomyRequestForm test - success/fail depends on random");
@@ -69,6 +73,7 @@ int	main ( void ) {
 		catch (const std::exception &e) {
 				std::cerr << e.what() << std::endl;
 		}
+		printSeparator();
 	}
 	{
 		printTestHeader("PresidentialPardonForm test - success");
@@ -85,6 +90,7 @@ int	main ( void ) {
 		catch (const std::exception &e) {
 				std::cerr << e.what() << std::endl;
 		}
+		printSeparator();
 	}
 	{
 		printTestHeader("PresidentialPardonForm test - fail");
@@ -101,6 +107,7 @@ int	main ( void ) {
 		catch (const std::exception &e) {
 				std::cerr << e.what() << std::endl;
 		}
+		printSeparator();
 	}
 	{
 		printTestHeader("PresidentialPardonForm test - success");
@@ -117,6 +124,7 @@ int	main ( void ) {
 		catch (const std::exception &e) {
 				std::cerr << e.what() << std::endl;
 		}
+		printSeparator();
 	}
 	printSeparator();
 	std::cout << "✅ All tests finished!\n";

@@ -4,7 +4,7 @@
 #include "utils.hpp"
 
 int	main ( void ) {
-
+	clearTerminal();
 	{
 		printTestHeader("Form: Testing DEFAULT constructor");
 		expect("name = '<Unnamed> Form', isSigned = false, gradeToSign = 1, gradeToExec = 1");
@@ -15,6 +15,7 @@ int	main ( void ) {
 		catch (const std::exception &e) {
 			std::cerr << e.what() << std::endl;
 		}
+		printSeparator();
 	}
 	{
 		printTestHeader("Form: Testing PARAMETERIZED constructor");
@@ -26,6 +27,7 @@ int	main ( void ) {
 		catch (const std::exception &e) {
 			std::cerr << e.what() << std::endl;
 		}
+		printSeparator();
 	}
 	{
 		printTestHeader("Form: Testing PARAMETERIZED constructor and beSigned() - SUCCESS");
@@ -41,6 +43,7 @@ int	main ( void ) {
 		catch (const std::exception &e) {
 			std::cerr << e.what() << std::endl;
 		}
+		printSeparator();
 	}
 	{
 		printTestHeader("Form: Testing PARAMETERIZED constructor and beSigned() - FAIL");
@@ -55,6 +58,7 @@ int	main ( void ) {
 		catch (const std::exception &e) {
 			std::cerr << e.what() << std::endl;
 		}
+		printSeparator();
 	}
 	{
 		printTestHeader("Form: Testing PARAMETERIZED constructor and signForm() - SUCCESS");
@@ -69,6 +73,7 @@ int	main ( void ) {
 		catch (const std::exception &e) {
 			std::cerr << e.what() << std::endl;
 		}
+		printSeparator();
 	}
 	{
 		printTestHeader("Form: Testing PARAMETERIZED constructor and signForm() - FAIL");
@@ -83,6 +88,7 @@ int	main ( void ) {
 		catch (const std::exception &e) {
 			std::cerr << e.what() << std::endl;
 		}
+		printSeparator();
 	}
 	printSeparator();
 	std::cout << "✅ All tests finished!\n";

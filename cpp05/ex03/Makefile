@@ -69,6 +69,7 @@ clean:
 fclean: clean
 	$(call status,🟡 Removing binary..., $(YELLOW))
 	rm -f $(NAME)
+	rm -f *_shrubbery
 	@echo ""
 
 re: fclean all

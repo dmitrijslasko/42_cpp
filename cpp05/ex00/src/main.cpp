@@ -13,6 +13,7 @@ int	main ( void ) {
 		catch (const std::exception &e) {
 			std::cerr << e.what() << std::endl;
 		}
+		printSeparator();
 	}
 	{
 		printTestHeader("Testing PARAMETERIZED constructor");
@@ -24,6 +25,7 @@ int	main ( void ) {
 		catch (const std::exception &e) {
 			std::cerr << e.what() << std::endl;
 		}
+		printSeparator();
 	}
 	{
 		printTestHeader("Testing PARAMETERIZED constructor with a grade too high (<1)");
@@ -34,6 +36,7 @@ int	main ( void ) {
 		catch (const std::exception &e) {
 			std::cerr << e.what() << std::endl;
 		}
+		printSeparator();
 	}
 	{
 		printTestHeader("Testing PARAMETERIZED constructor with a grade too low (>150)");
@@ -44,9 +47,10 @@ int	main ( void ) {
 		catch (const std::exception &e) {
 			std::cerr << e.what() << std::endl;
 		}
+		printSeparator();
 	}
 	{
-		printTestHeader("Testing INCREMENTS that go too far (below 1)");
+		printTestHeader("Testing INCREMENTS that go too high (below 1)");
 		expect("Incremented grade for first 3. Exception: grade too high for 2 next.");
 		const int COUNT = 5;
 		Bureaucrat bureaucrats[COUNT];
@@ -54,15 +58,16 @@ int	main ( void ) {
 			try {
 				std::cout << "[" << i + 1<< "] ";
 				bureaucrats[i].incrementGrade(10 + i * 50);
-				// std::cout << bureaucrats[i] << std::endl;
+				std::cout << bureaucrats[i] << std::endl;
 			}
 			catch (const std::exception &e) {
 				std::cerr << e.what() << std::endl;
 			}
 		}
+		printSeparator();
 	}
 	{
-		printTestHeader("Testing DECREMENTS that go too far (above 150)");
+		printTestHeader("Testing DECREMENTS that go too low (above 150)");
 		expect("Decremented grade for first 3. Exception: grade too low for 2 next.");
 		const int COUNT = 5;
 		Bureaucrat bureaucrats[COUNT];
@@ -79,6 +84,7 @@ int	main ( void ) {
 				std::cerr << e.what() << std::endl;
 			}
 		}
+		printSeparator();
 	}
 	printSeparator();
 	std::cout << "✅ All tests finished!\n";

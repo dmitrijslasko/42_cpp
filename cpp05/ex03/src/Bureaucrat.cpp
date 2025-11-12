@@ -16,11 +16,11 @@ Bureaucrat::Bureaucrat() : name_("<Unnamed> Bureaucrat"), grade_(Bureaucrat::LOW
 // Constructor (parameterized)
 Bureaucrat::Bureaucrat(const std::string &name, int grade) : name_(name), grade_(grade) {
 	if (grade > Bureaucrat::LOWEST_GRADE)
-		throw GradeTooHighException();
-	else if (grade < Bureaucrat::HIGHEST_GRADE)
 		throw GradeTooLowException();
+	else if (grade < Bureaucrat::HIGHEST_GRADE)
+		throw GradeTooHighException();
 	std::cout << ">>> 👔 ✅ Bureaucrat PARAMETERIZED constructor.";
-	printFullInfo(*this);int signForm( void );
+	printFullInfo(*this);
 }
 
 // Copy constructor
@@ -88,7 +88,7 @@ int Bureaucrat::signForm( AForm &form ) {
 	}
 	catch (const std::exception &e) {
 		setColor(RED);
-		std::cout << "❌ Bureaucrat '" << this->getName() << "' could not sign " << form.getName() << " because " << e.what();
+		std::cout << "❌ Bureaucrat '" << this->getName() << "' could not sign '" << form.getName() << "' because " << e.what();
 		resetColor();
 		std::cout << std::endl;
 		return 1;

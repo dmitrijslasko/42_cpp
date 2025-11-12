@@ -10,13 +10,6 @@ using std::exception;
 
 class Intern {
 
-	// private:
-	// 	std::string const	name_;
-	// 	int					grade_;
-
-	// 	static const int	HIGHEST_GRADE = 1;
-	// 	static const int	LOWEST_GRADE = 150;
-
 	public:
 		Intern();
 		Intern(const std::string &name, int grade);
