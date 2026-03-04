@@ -1,20 +1,31 @@
 #include <iostream>
 
+#include <iomanip>
+
 #include "ScalarConverter.hpp"
+#include "utils.hpp"
 
 int main(int argc, char **argv)
 {
+
 	if (argc != 2)
 	{
 		std::cerr << "Usage: " << argv[0] << " <literal>" << std::endl;
 		return 1;
 	}
 
+	const char* TRUE  = "✅ true";
+	const char* FALSE = "❌ false";
+	const int WIDTH = 12;
+
 	std::string literal(argv[1]);
+	printSeparator();
 	std::cout << "Input: " << literal << std::endl;
-	std::cout << "Is char: " << (ScalarConverter::isChar(literal) ? "true" : "false") << std::endl;
-	std::cout << "Is int: " << (ScalarConverter::isInt(literal) ? "true" : "false") << std::endl;
-	std::cout << "Is float: " << (ScalarConverter::isFloat(literal) ? "true" : "false") << std::endl;
+	printSeparator();
+	std::cout << std::left << std::setw(WIDTH) << "Is char: " << (ScalarConverter::isChar(literal) ? TRUE : FALSE) << std::endl;
+	std::cout << std::left << std::setw(WIDTH) << "Is int: " << (ScalarConverter::isInt(literal) ? TRUE : FALSE) << std::endl;
+	std::cout << std::left << std::setw(WIDTH) << "Is float: " << (ScalarConverter::isFloat(literal) ? TRUE : FALSE) << std::endl;
+	std::cout << std::left << std::setw(WIDTH) << "Is double: " << (ScalarConverter::isDouble(literal) ? TRUE : FALSE) << std::endl;
 
 	return 0;
 }

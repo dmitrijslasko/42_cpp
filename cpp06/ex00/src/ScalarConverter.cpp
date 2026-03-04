@@ -6,7 +6,7 @@ bool ScalarConverter::isChar(const std::string &s) {
 
 bool ScalarConverter::isInt(const std::string &s) {
 	size_t i = 0;
-	if (s[i] == '-' || s[i] == '+')
+	if (s[i] == '-')
 		i++;
 
 	if (i == s.length())
@@ -29,9 +29,30 @@ bool ScalarConverter::isFloat(const std::string &s) {
 
 	size_t i = 0;
 
-	if (s[i] == '+' || s[i] == '-')
+	if (s[i] == '-')
 		i++;
 	while (i < s.length() - 1) {
+		if (s[i] == '.') {
+			if (hasDot)
+				return false;
+			hasDot = true;
+		}
+		else if (!isdigit(s[i]))
+			return false;
+		i++;
+	}
+	return hasDot;
+}
+
+bool ScalarConverter::isDouble(const std::string &s) {
+
+	bool hasDot = false;
+
+	size_t i = 0;
+
+	if (s[i] == '-')
+		i++;
+	while (i < s.length()) {
 		if (s[i] == '.') {
 			if (hasDot)
 				return false;

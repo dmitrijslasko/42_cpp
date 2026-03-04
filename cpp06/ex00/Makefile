@@ -23,9 +23,10 @@ UTILS_DIR = ./../utils
 
 SRC =	$(SRC_DIR)/main.cpp \
 		$(SRC_DIR)/ScalarConverter.cpp \
+		$(UTILS_DIR)/utils.cpp		\
 
 # Convert all .cpp to .o inside obj folder (regardless of location)
-OBJ = $(patsubst %.cpp,$(OBJ_DIR)/%.o,$(notdir $(SRC)))
+OBJ = $(patsubst %.cpp,$(OBJ_DIR)/%.o,$(SRC))
 
 # =================== Functions ===================
 define status
@@ -44,12 +45,8 @@ $(NAME): $(OBJ)
 	@echo ""
 
 # Pattern rule for source files
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
-	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CXXFLAGS) -I$(INC_DIR) -I$(UTILS_DIR) -c $< -o $@
-
-$(OBJ_DIR)/%.o: $(UTILS_DIR)/%.cpp
-	@mkdir -p $(OBJ_DIR)
+$(OBJ_DIR)/%.o: %.cpp
+	@mkdir -p $(dir $@)
 	$(CC) $(CXXFLAGS) -I$(INC_DIR) -I$(UTILS_DIR) -c $< -o $@
 
 # Auto-include generated dependency files (.d)
