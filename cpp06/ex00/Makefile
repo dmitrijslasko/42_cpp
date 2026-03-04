@@ -6,17 +6,20 @@ RST    = \033[0m
 
 # =================== Compiler ===================
 CC = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+CXXFLAGS = -Wall -Wextra -Werror
+CXXFLAGS += -std=c++98
+# This will enable warnings for old-style casts, deprecated declarations, and enforce strict ISO compliance
 CXXFLAGS += -Wold-style-cast -Wdeprecated-declarations -Wpedantic
+# These flags will generate dependency files (.d) for each source file, which will be included in the Makefile to automatically handle header dependencies
 CXXFLAGS += -MMD -MP
 
 # =================== Project ===================
 NAME = main
 
-SRC_DIR = src
-OBJ_DIR = obj
-INC_DIR = include
-UTILS_DIR = ../utils
+SRC_DIR = ./src
+OBJ_DIR = ./obj
+INC_DIR = ./include
+UTILS_DIR = ./../utils
 
 SRC =	$(SRC_DIR)/main.cpp \
 		$(SRC_DIR)/ScalarConverter.cpp \
@@ -24,14 +27,16 @@ SRC =	$(SRC_DIR)/main.cpp \
 # Convert all .cpp to .o inside obj folder (regardless of location)
 OBJ = $(patsubst %.cpp,$(OBJ_DIR)/%.o,$(notdir $(SRC)))
 
-# =================== Rules ===================
-all: compile $(NAME)
-
+# =================== Functions ===================
 define status
 	@echo "--------------------------------------------------------------------"
 	@echo "$(2)>>> $(1) ${RST}"
 	@echo "--------------------------------------------------------------------"
 endef
+
+# =================== Rules ===================
+all: compile $(NAME)
+
 
 $(NAME): $(OBJ)
 	$(call status,🟢 Linking object files..., $(GREEN))
@@ -67,4 +72,5 @@ fclean: clean
 
 re: fclean all
 
+# Phony targets to prevent conflicts with files named 'all', 'clean', etc.
 .PHONY: all clean fclean re
