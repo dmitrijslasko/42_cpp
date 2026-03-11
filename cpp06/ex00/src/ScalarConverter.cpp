@@ -78,31 +78,74 @@ bool ScalarConverter::isDouble(const std::string &s) {
 	return hasDot;
 }
 
+static void printChar(double value) {
+	std::cout << std::left << std::setw(ScalarConverter::WIDTH) << "char: ";
+
+	if (value < 0 || value > 127 || 
+		ScalarConverter::isPseudoFloat(std::to_string(value)) || 
+		ScalarConverter::isPseudoDouble(std::to_string(value)))
+	{
+		std::cout << "impossible";
+		std::cout << std::endl;
+		return ;
+	}
+	else if (value < 32 || value == 127)
+	{
+		std::cout << "non displayable";
+		std::cout << std::endl;
+		return ;
+	}
+	std::cout << '\'';
+	std::cout << static_cast<char>(value);
+	std::cout << '\'';
+	std::cout << std::endl;
+}
+
+static void printInt(double value) {
+	std::cout << std::left << std::setw(ScalarConverter::WIDTH) << "int: ";
+
+	if (value < static_cast<double>(INT_MIN) || 
+		value > static_cast<double>(INT_MAX) || 
+		ScalarConverter::isPseudoFloat(std::to_string(value)) || 
+		ScalarConverter::isPseudoDouble(std::to_string(value)))
+	{
+		std::cout << "impossible";
+		std::cout << std::endl;
+		return ;
+	}
+	std::cout << static_cast<int>(value);
+	std::cout << std::endl;
+}
+
+static void printFloat(double value) {
+	std::cout << std::left << std::setw(ScalarConverter::WIDTH) << "float: ";
+
+	std::cout << std::fixed << std::setprecision(1);
+	std::cout << static_cast<float>(value) << "f";
+	std::cout << std::endl;
+}
+
+static void printDouble(double value) {
+	std::cout << std::left << std::setw(ScalarConverter::WIDTH) << "double: ";
+
+	std::cout << std::fixed << std::setprecision(1);
+	std::cout << static_cast<double>(value);
+	std::cout << std::endl;
+}
+
+
 void ScalarConverter::convert(const std::string &literal) {
 
 	// value will store the numeric representation of the input
 	double 	value;
-
-	value = static_cast<double>(literal[0]);
-
-	/* char */
-	std::cout << std::left << std::setw(ScalarConverter::WIDTH) << "char: ";
-	std::cout << static_cast<char>(literal[0]);
-	std::cout << std::endl;
-
-	/* int */
-	std::cout << std::left << std::setw(ScalarConverter::WIDTH) << "int: ";
-	std::cout << static_cast<int>(literal[0]);
-	std::cout << std::endl;
-
-	/* float */
-	std::cout << std::left << std::setw(ScalarConverter::WIDTH) << "float: ";
-	std::cout << std::fixed << std::setprecision(1);
-	std::cout << static_cast<float>(literal[0]) << "f";
-	std::cout << std::endl;
-
-	/* double */
-	std::cout << std::left << std::setw(ScalarConverter::WIDTH) << "double: ";
-	std::cout << static_cast<double>(literal[0]);
-	std::cout << std::endl;
+	// strod converts a string to a double, and we use it to handle all types of input (char, int, float, double)
+	if (isChar(literal))
+        value = static_cast<double>(literal[0]);
+    else
+        value = std::strtod(literal.c_str(), NULL);
+	
+	printChar(value);
+	printInt(value);
+	printFloat(value);
+	printDouble(value);
 }

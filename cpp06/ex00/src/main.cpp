@@ -22,6 +22,7 @@ int main(int argc, char **argv)
 	std::string literal(argv[1]);
 
 	printSeparator();
+	std::cout << std::left << std::setw(ScalarConverter::WIDTH);
 	std::cout << "INPUT: " << literal << std::endl;
 	printSeparator();
 	std::cout << std::left << std::setw(ScalarConverter::WIDTH) << "Is char: " << (ScalarConverter::isChar(literal) ? TRUE : FALSE) << std::endl;
@@ -32,8 +33,8 @@ int main(int argc, char **argv)
 	std::cout << std::left << std::setw(ScalarConverter::WIDTH) << "Is pseudo-double: " << (ScalarConverter::isPseudoDouble(literal) ? TRUE : FALSE) << std::endl;
 	printSeparator();
 
-	std::cout << "CONVERSIONS: " << std::endl;
-	printSeparator();
+	// std::cout << "CONVERSIONS: " << std::endl;
+	// printSeparator();
 	ScalarConverter::convert(literal);
 	printSeparator();
 
