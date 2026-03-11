@@ -1,25 +1,29 @@
 #include <string>
 
 class ScalarConverter {
+
 	private:
 		// constructor
 		ScalarConverter();
-		// destructor
-		~ScalarConverter();
 		// copy constructor
 		ScalarConverter(const ScalarConverter &other);
 		// assignment operator
 		ScalarConverter &operator=(const ScalarConverter &other);
+		// destructor
+		~ScalarConverter();
 
-		static bool isPseudoLiteral(const std::string &s);
+	public:
 
-		public:
+		static const int WIDTH = 20;
 
 		static bool isChar(const std::string &s);
 		static bool isInt(const std::string &s);
 		static bool isFloat(const std::string &s);
 		static bool isDouble(const std::string &s);
 
-		static void convert(std::string &literal);
+		static bool isPseudoFloat(const std::string& s);
+		static bool isPseudoDouble(const std::string& s);
+
+		static void convert(const std::string &literal);
 };
 

@@ -4,7 +4,8 @@
 #include "colors.hpp"
 #include "utils.hpp"
 
-#define SEPARATOR_WIDTH	120
+#define SEPARATOR_CLR	GREEN
+#define SEPARATOR_WIDTH	80
 #define SEPARATOR_CHAR	'='
 
 void	setColor (const std::string color) {
@@ -15,16 +16,16 @@ void	resetColor ( void ) {
 	std::cout << RESET;
 }
 
-void	printSeparator( void ) {
-	std::string out = "";
-	for (int i = 0; i < SEPARATOR_WIDTH; i++)
-		out += SEPARATOR_CHAR;
-	setColor(CYAN);
-	std::cout << out;
-	resetColor();
-	std::cout << std::endl;
-}
+void printSeparator(void)
+{
+    setColor(SEPARATOR_CLR);
 
+    for (int i = 0; i < SEPARATOR_WIDTH; ++i)
+        std::cout << SEPARATOR_CHAR;
+
+    resetColor();
+    std::cout << std::endl;
+}
 void	printTestHeader(std::string test_name)
 {
 	waitForInput();
