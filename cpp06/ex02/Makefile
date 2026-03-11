@@ -14,7 +14,7 @@ CXXFLAGS += -Wold-style-cast -Wdeprecated-declarations -Wpedantic
 CXXFLAGS += -MMD -MP
 
 # =================== Project ===================
-NAME = convert
+NAME = serializer
 
 SRC_DIR = ./src
 OBJ_DIR = ./obj
@@ -22,7 +22,7 @@ INC_DIR = ./include
 UTILS_DIR = ./../utils
 
 SRC =	$(SRC_DIR)/main.cpp \
-		$(SRC_DIR)/ScalarConverter.cpp \
+		$(SRC_DIR)/Serializer.cpp \
 		$(UTILS_DIR)/utils.cpp		\
 
 # Convert all .cpp to .o inside obj folder (regardless of location)
