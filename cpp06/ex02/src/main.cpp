@@ -1,33 +1,22 @@
+#include <cstdlib>
+#include <ctime>
 #include <iostream>
 
-#include "Serializer.hpp"
+#include "identify.hpp"
 #include "utils.hpp"
 
 int main()
 {
-    Data data;
-
-    data.id = 42;
-    data.name = "example";
-
-    Data* original = &data;
-
-    uintptr_t raw = Serializer::serialize(original);
-
-    Data* restored = Serializer::deserialize(raw);
-
     printSeparator();
+	std::srand(std::time(NULL));
 
-    std::cout << "Original pointer:  " << original << std::endl;
-    std::cout << "Serialized value:  " << raw << std::endl;
-    std::cout << "Restored pointer:  " << restored << std::endl;
+	Base* base = generate();
+    identify(base);
+    identify(*base);
+    printSeparator();
     
-    printSeparator();
-    if (original == restored)
-        std::cout << "✅ Pointers match" << std::endl;
-    else
-        std::cout << "❌ Pointers do NOT match" << std::endl;
+	// Clean up
+	delete base;
 
-    printSeparator();
-    return 0;
+	return 0;
 }
