@@ -24,10 +24,11 @@ int main()
     
     printSeparator();
     if (original == restored)
-        std::cout << "✅ Pointers match" << std::endl;
+        std::cout << "✅ Pointers match!" << std::endl;
     else
-        std::cout << "❌ Pointers do NOT match" << std::endl;
+        std::cout << "❌ Pointers do NOT match!" << std::endl;
 
     printSeparator();
+    
     return 0;
 }
