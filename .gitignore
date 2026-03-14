@@ -1,5 +1,16 @@
-.vscode
+# executables
+ex00/convert
+ex01/serialize
+ex02/identify
+
+# objects
 obj
-.o
-.d
+*.o
+*.d
+
+# default binary
+a.out
+
+# IDE files
+.vscode
 .DS_Store

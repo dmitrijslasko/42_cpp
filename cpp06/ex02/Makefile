@@ -14,7 +14,7 @@ CXXFLAGS += -Wold-style-cast -Wdeprecated-declarations -Wpedantic
 CXXFLAGS += -MMD -MP
 
 # =================== Project ===================
-NAME = main
+NAME = identify
 
 SRC_DIR = ./src
 OBJ_DIR = ./obj
