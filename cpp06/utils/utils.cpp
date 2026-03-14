@@ -26,6 +26,17 @@ void printSeparator(void)
     resetColor();
     std::cout << std::endl;
 }
+
+void printSeparator(std::string color)
+{
+    setColor(color);
+
+    for (int i = 0; i < SEPARATOR_WIDTH; ++i)
+        std::cout << SEPARATOR_CHAR;
+
+    resetColor();
+    std::cout << std::endl;
+}
 void	printTestHeader(std::string test_name)
 {
 	waitForInput();

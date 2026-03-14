@@ -1,5 +1,6 @@
 #include <iostream>
 #include <iomanip>
+#include <limits>
 
 #include "ScalarConverter.hpp"
 
@@ -79,10 +80,11 @@ bool ScalarConverter::isDouble(const std::string &s) {
 }
 
 static void printChar(double value) {
-	
+
 	std::cout << std::left << std::setw(ScalarConverter::WIDTH) << "char: ";
 
-	if (value < 0 || value > 127 || 
+	if (value < std::numeric_limits<char>::min() ||
+		value > std::numeric_limits<char>::max() ||
 		ScalarConverter::isPseudoFloat(std::to_string(value)) || 
 		ScalarConverter::isPseudoDouble(std::to_string(value)))
 	{
@@ -105,8 +107,8 @@ static void printChar(double value) {
 static void printInt(double value) {
 	std::cout << std::left << std::setw(ScalarConverter::WIDTH) << "int: ";
 
-	if (value < static_cast<double>(INT_MIN) || 
-		value > static_cast<double>(INT_MAX) || 
+	if (value < std::numeric_limits<int>::min() ||
+		value > std::numeric_limits<int>::max() ||
 		ScalarConverter::isPseudoFloat(std::to_string(value)) || 
 		ScalarConverter::isPseudoDouble(std::to_string(value)))
 	{

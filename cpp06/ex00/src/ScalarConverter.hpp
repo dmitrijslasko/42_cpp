@@ -1,3 +1,6 @@
+#ifndef SCALARCONVERTER_HPP
+# define SCALARCONVERTER_HPP
+
 #include <string>
 
 class ScalarConverter {
@@ -27,3 +30,4 @@ class ScalarConverter {
 		static void convert(const std::string &literal);
 };
 
+#endif
