@@ -4,10 +4,18 @@
 #include "ScalarConverter.hpp"
 #include "utils.hpp"
 
-
+// global constants for output formatting
+// better thant macros because they are typed and scoped, and they can be used in expressions without side effects
 const char* TRUE  = "✅ true";
 const char* FALSE = "❌ false";
 
+void printCheck(const std::string& label, bool value)
+{
+    std::cout << std::left << std::setw(ScalarConverter::WIDTH)
+              << label
+              << (value ? TRUE : FALSE)
+              << std::endl;
+}
 
 int main(int argc, char **argv)
 {
@@ -18,23 +26,27 @@ int main(int argc, char **argv)
 		return 1;
 	}
 
-
 	std::string literal(argv[1]);
 
 	printSeparator();
 	std::cout << std::left << std::setw(ScalarConverter::WIDTH);
-	std::cout << "INPUT: " << literal << std::endl;
+	std::cout << "Input: " << literal << std::endl;
 	printSeparator();
-	std::cout << std::left << std::setw(ScalarConverter::WIDTH) << "Is char: " << (ScalarConverter::isChar(literal) ? TRUE : FALSE) << std::endl;
-	std::cout << std::left << std::setw(ScalarConverter::WIDTH) << "Is int: " << (ScalarConverter::isInt(literal) ? TRUE : FALSE) << std::endl;
-	std::cout << std::left << std::setw(ScalarConverter::WIDTH) << "Is float: " << (ScalarConverter::isFloat(literal) ? TRUE : FALSE) << std::endl;
-	std::cout << std::left << std::setw(ScalarConverter::WIDTH) << "Is double: " << (ScalarConverter::isDouble(literal) ? TRUE : FALSE) << std::endl;
-	std::cout << std::left << std::setw(ScalarConverter::WIDTH) << "Is pseudo-float: " << (ScalarConverter::isPseudoFloat(literal) ? TRUE : FALSE) << std::endl;
-	std::cout << std::left << std::setw(ScalarConverter::WIDTH) << "Is pseudo-double: " << (ScalarConverter::isPseudoDouble(literal) ? TRUE : FALSE) << std::endl;
+	printCheck("Is char: ", ScalarConverter::isChar(literal));
+	printCheck("Is int: ", ScalarConverter::isInt(literal));
+	printCheck("Is float: ", ScalarConverter::isFloat(literal));
+	printCheck("Is double: ", ScalarConverter::isDouble(literal));
+	printCheck("Is pseudo-float: ", ScalarConverter::isPseudoFloat(literal));
+	printCheck("Is pseudo-double: ", ScalarConverter::isPseudoDouble(literal));
 	printSeparator();
 
-	// std::cout << "CONVERSIONS: " << std::endl;
-	// printSeparator();
+	if (!ScalarConverter::isChar(literal) && !ScalarConverter::isInt(literal) && !ScalarConverter::isFloat(literal) && !ScalarConverter::isDouble(literal) &&
+	    !ScalarConverter::isPseudoFloat(literal) && !ScalarConverter::isPseudoDouble(literal))
+	{
+		std::cerr << "Invalid literal" << std::endl;
+		printSeparator();
+		return 1;
+	}
 	ScalarConverter::convert(literal);
 	printSeparator();
 

@@ -79,6 +79,7 @@ bool ScalarConverter::isDouble(const std::string &s) {
 }
 
 static void printChar(double value) {
+	
 	std::cout << std::left << std::setw(ScalarConverter::WIDTH) << "char: ";
 
 	if (value < 0 || value > 127 || 
