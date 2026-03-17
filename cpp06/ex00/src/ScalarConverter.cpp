@@ -1,21 +1,23 @@
 #include <iostream>
 #include <iomanip>
 #include <limits>
+#include <cstdlib>
 
 #include "ScalarConverter.hpp"
 
+// Type detection functions
 bool ScalarConverter::isPseudoFloat(const std::string& s)
 {
-    return (s == "nanf" || s == "+inff" || s == "-inff");
+	return (s == "nanf" || s == "+inff" || s == "-inff");
 }
 
 bool ScalarConverter::isPseudoDouble(const std::string& s)
 {
-    return (s == "nan" || s == "+inf" || s == "-inf");
+	return (s == "nan" || s == "+inf" || s == "-inf");
 }
 
 bool ScalarConverter::isChar(const std::string &s) {
-    return (s.length() == 1 && !isdigit(s[0]));
+	return (s.length() == 1 && !isdigit(s[0]));
 }
 
 bool ScalarConverter::isInt(const std::string &s) {
@@ -79,6 +81,8 @@ bool ScalarConverter::isDouble(const std::string &s) {
 	return hasDot;
 }
 
+
+// Printing functions
 static void printChar(double value) {
 
 	std::cout << std::left << std::setw(ScalarConverter::WIDTH) << "char: ";
@@ -88,14 +92,12 @@ static void printChar(double value) {
 		ScalarConverter::isPseudoFloat(std::to_string(value)) || 
 		ScalarConverter::isPseudoDouble(std::to_string(value)))
 	{
-		std::cout << "impossible";
-		std::cout << std::endl;
+		std::cout << "impossible" << std::endl;
 		return ;
 	}
 	else if (value < 32 || value == 127)
 	{
-		std::cout << "non displayable";
-		std::cout << std::endl;
+		std::cout << "non displayable" << std::endl;
 		return ;
 	}
 	std::cout << '\'';
@@ -112,8 +114,7 @@ static void printInt(double value) {
 		ScalarConverter::isPseudoFloat(std::to_string(value)) || 
 		ScalarConverter::isPseudoDouble(std::to_string(value)))
 	{
-		std::cout << "impossible";
-		std::cout << std::endl;
+		std::cout << "impossible" << std::endl;
 		return ;
 	}
 	std::cout << static_cast<int>(value);
@@ -139,16 +140,22 @@ static void printDouble(double value) {
 
 void ScalarConverter::convert(const std::string &literal) {
 
-	// value will store the numeric representation of the input
-	double 	value;
-	// strod converts a string to a double, and we use it to handle all types of input (char, int, float, double)
-	if (isChar(literal))
+    double value;
+
+    if (isChar(literal)) {
         value = static_cast<double>(literal[0]);
-    else
-        value = std::strtod(literal.c_str(), NULL);
-	
-	printChar(value);
-	printInt(value);
-	printFloat(value);
-	printDouble(value);
+    } else {
+        char* end;
+        value = strtod(literal.c_str(), &end);
+
+        if (*end != '\0' && !(*end == 'f' && *(end + 1) == '\0')) {
+            std::cout << "Invalid input" << std::endl;
+            return;
+        }
+    }
+
+    printChar(value);
+    printInt(value);
+    printFloat(value);
+    printDouble(value);
 }

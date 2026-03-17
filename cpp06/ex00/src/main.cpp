@@ -9,16 +9,14 @@
 const char* TRUE  = "✅ true";
 const char* FALSE = "❌ false";
 
-void printCheck(const std::string& label, bool value)
-{
+void printCheck(const std::string& label, bool value) {
     std::cout << std::left << std::setw(ScalarConverter::WIDTH)
               << label
               << (value ? TRUE : FALSE)
               << std::endl;
 }
 
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
 
 	if (argc != 2)
 	{
@@ -32,21 +30,30 @@ int main(int argc, char **argv)
 	std::cout << std::left << std::setw(ScalarConverter::WIDTH);
 	std::cout << "Input: " << literal << std::endl;
 	printSeparator();
+
+	// type checks
 	printCheck("Is char: ", ScalarConverter::isChar(literal));
 	printCheck("Is int: ", ScalarConverter::isInt(literal));
 	printCheck("Is float: ", ScalarConverter::isFloat(literal));
 	printCheck("Is double: ", ScalarConverter::isDouble(literal));
 	printCheck("Is pseudo-float: ", ScalarConverter::isPseudoFloat(literal));
 	printCheck("Is pseudo-double: ", ScalarConverter::isPseudoDouble(literal));
+	
 	printSeparator();
 
-	if (!ScalarConverter::isChar(literal) && !ScalarConverter::isInt(literal) && !ScalarConverter::isFloat(literal) && !ScalarConverter::isDouble(literal) &&
-	    !ScalarConverter::isPseudoFloat(literal) && !ScalarConverter::isPseudoDouble(literal))
+	if (!ScalarConverter::isChar(literal) && 
+		!ScalarConverter::isInt(literal) && 
+		!ScalarConverter::isFloat(literal) && 
+		!ScalarConverter::isDouble(literal) &&
+	    !ScalarConverter::isPseudoFloat(literal) && 
+		!ScalarConverter::isPseudoDouble(literal))
 	{
 		std::cerr << "Invalid literal" << std::endl;
 		printSeparator();
 		return 1;
 	}
+
+	// conversion and printing
 	ScalarConverter::convert(literal);
 	printSeparator();
 
