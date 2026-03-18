@@ -1,7 +1,8 @@
 #include <iostream>
 #include <iomanip>
-#include <limits>
 #include <cstdlib>
+#include <cerrno>
+#include <limits>
 #include <cmath>
 
 #include "ScalarConverter.hpp"
@@ -20,90 +21,113 @@ bool ScalarConverter::isPseudoDouble(const std::string& s)
 }
 
 bool ScalarConverter::isChar(const std::string &s) {
-	if (s.length() != 1)
-		return false;
-	if (!isdigit(s[0]))
-		return false;
-	return true;
+	return (s.length() == 1 && std::isprint(s[0]) && !std::isdigit(s[0]));
 }
 
 bool ScalarConverter::isInt(const std::string &s) {
-
 	if (s.empty())
-    	return false;
-
-	if (isdigit(s[0]) || (s[0] == '-' && s.length() > 1 && isdigit(s[1])))
 		return false;
+
+	char *end;
+	errno = 0;
 	
+	// on error, strtol returns LONG_MAX or LONG_MIN and sets errno to ERANGE
+	long value = std::strtol(s.c_str(), &end, 10);
+
+	// check conversion validity
+	if (*end != '\0')
+		return false;
+
+	// check overflow / underflow
+	if (errno == ERANGE ||
+		value < std::numeric_limits<int>::min() ||
+		value > std::numeric_limits<int>::max())
+		return false;
+
 	return true;
-
-	// long value = std::strtol(s.c_str(), NULL, 10);
-	
-	// if (value < std::numeric_limits<int>::min() ||
-	// 	value > std::numeric_limits<int>::max() ||
-	// 	std::isnan(value) || std::isinf(value))
-	// 	return false;
-
-	// size_t i = 0;
-	// if (s[i] == '-')
-	// 	i++;
-
-	// if (i == s.length())
-	// 	return false;
-
-	// while (i < s.length()) {
-	// 	if (!isdigit(s[i]))
-	// 		return false;
-	// 	i++;
-	// }
-	// return true;
 }
 
 bool ScalarConverter::isFloat(const std::string &s) {
 
-	bool hasDot = false;
+	if (s.empty())
+		return false;
 
 	if (s[s.length() - 1] != 'f')
 		return false;
 
 	size_t i = 0;
+	bool hasDot = false;
+	bool hasDigit = false;
 
-	if (s[i] == '-')
+	// sign
+	if (s[i] == '+' || s[i] == '-')
 		i++;
+
+	if (i >= s.length() - 1) // nothing before 'f'
+		return false;
+
 	while (i < s.length() - 1) {
 		if (s[i] == '.') {
 			if (hasDot)
 				return false;
 			hasDot = true;
 		}
-		else if (!isdigit(s[i]))
+		else if (std::isdigit(s[i])) {
+			hasDigit = true;
+		}
+		else {
 			return false;
+		}
 		i++;
 	}
-	return hasDot;
+
+	return hasDot && hasDigit;
 }
+
+#include <cctype>
 
 bool ScalarConverter::isDouble(const std::string &s) {
 
-	bool hasDot = false;
+	if (s.empty())
+		return false;
 
 	size_t i = 0;
+	bool hasDot = false;
+	bool hasDigit = false;
 
-	if (s[i] == '-')
+	// sign
+	if (s[i] == '+' || s[i] == '-')
 		i++;
+
+	if (i == s.length())
+		return false;
+
 	while (i < s.length()) {
 		if (s[i] == '.') {
 			if (hasDot)
 				return false;
 			hasDot = true;
 		}
-		else if (!isdigit(s[i]))
+		else if (std::isdigit(s[i])) {
+			hasDigit = true;
+		}
+		else {
 			return false;
+		}
 		i++;
 	}
-	return hasDot;
+
+	return hasDot && hasDigit;
 }
 
+static int getPrecision(const std::string& s) {
+	size_t dot = s.find('.');
+	if (dot == std::string::npos)
+		return 1;
+
+	size_t end = s.find_first_not_of("0123456789", dot + 1);
+	return (end == std::string::npos ? s.length() : end) - dot - 1;
+}
 
 // Printing functions
 static void printChar(double value) {
@@ -138,7 +162,7 @@ static void printInt(double value) {
 	std::cout << static_cast<int>(value) << std::endl;
 }
 
-static void printFloat(double value) {
+static void printFloat(double value, const std::string& literal) {
 	std::cout << std::left << std::setw(ScalarConverter::WIDTH) << "float: ";
 
 	if (std::isnan(value) || std::isinf(value)) {
@@ -146,18 +170,18 @@ static void printFloat(double value) {
 		return;
 	}
 
-	if (value == static_cast<int>(value))
-		std::cout << std::fixed << std::setprecision(1);
-	else
-		std::cout << std::setprecision(6);
+	int precision = getPrecision(literal);
+	std::cout << std::fixed << std::setprecision(precision);
 
 	std::cout << static_cast<float>(value) << "f" << std::endl;
 }
 
-static void printDouble(double value) {
+static void printDouble(double value, const std::string& literal) {
 	std::cout << std::left << std::setw(ScalarConverter::WIDTH) << "double: ";
 
-	// std::cout << std::fixed << std::setprecision(1);
+	int precision = getPrecision(literal);
+	std::cout << std::fixed << std::setprecision(precision);
+
 	std::cout << static_cast<double>(value);
 	std::cout << std::endl;
 }
@@ -181,6 +205,6 @@ void ScalarConverter::convert(const std::string &literal) {
 
     printChar(value);
     printInt(value);
-    printFloat(value);
-    printDouble(value);
+    printFloat(value, literal);
+    printDouble(value, literal);
 }

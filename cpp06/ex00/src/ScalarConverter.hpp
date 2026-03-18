@@ -23,7 +23,6 @@ class ScalarConverter {
 		static bool isInt(const std::string &s);
 		static bool isFloat(const std::string &s);
 		static bool isDouble(const std::string &s);
-
 		static bool isPseudoFloat(const std::string& s);
 		static bool isPseudoDouble(const std::string& s);
 

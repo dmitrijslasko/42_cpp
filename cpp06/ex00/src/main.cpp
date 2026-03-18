@@ -18,14 +18,17 @@ void printCheck(const std::string& label, bool value) {
 
 int main(int argc, char **argv) {
 
+	// check for exactly one argument (the literal to convert)
 	if (argc != 2)
 	{
 		std::cerr << "Usage: " << argv[0] << " <literal>" << std::endl;
 		return 1;
 	}
 
+	// convert the argument to a string for easier handling
 	std::string literal(argv[1]);
 
+	// print the input literal
 	printSeparator();
 	std::cout << std::left << std::setw(ScalarConverter::WIDTH);
 	std::cout << "Input: " << literal << std::endl;
@@ -38,9 +41,9 @@ int main(int argc, char **argv) {
 	printCheck("Is double: ", ScalarConverter::isDouble(literal));
 	printCheck("Is pseudo-float: ", ScalarConverter::isPseudoFloat(literal));
 	printCheck("Is pseudo-double: ", ScalarConverter::isPseudoDouble(literal));
-	
 	printSeparator();
 
+	// if the literal is not valid for any type, print an error and exit
 	if (!ScalarConverter::isChar(literal) && 
 		!ScalarConverter::isInt(literal) && 
 		!ScalarConverter::isFloat(literal) && 
