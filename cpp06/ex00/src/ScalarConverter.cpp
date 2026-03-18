@@ -4,6 +4,7 @@
 #include <cerrno>
 #include <limits>
 #include <cmath>
+#include <cctype>
 
 #include "ScalarConverter.hpp"
 
@@ -12,12 +13,12 @@
 
 bool ScalarConverter::isPseudoFloat(const std::string& s)
 {
-	return (s == "nanf" || s == "+inff" || s == "-inff");
+	return (s == "nanf" || s == "+inff" || s == "-inff" || s == "inff");
 }
 
 bool ScalarConverter::isPseudoDouble(const std::string& s)
 {
-	return (s == "nan" || s == "+inf" || s == "-inf");
+	return (s == "nan" || s == "+inf" || s == "-inf" || s == "inf");
 }
 
 bool ScalarConverter::isChar(const std::string &s) {
@@ -84,8 +85,6 @@ bool ScalarConverter::isFloat(const std::string &s) {
 	return hasDot && hasDigit;
 }
 
-#include <cctype>
-
 bool ScalarConverter::isDouble(const std::string &s) {
 
 	if (s.empty())
@@ -117,7 +116,7 @@ bool ScalarConverter::isDouble(const std::string &s) {
 		i++;
 	}
 
-	return hasDot && hasDigit;
+	return hasDigit;
 }
 
 static int getPrecision(const std::string& s) {
@@ -126,7 +125,12 @@ static int getPrecision(const std::string& s) {
 		return 1;
 
 	size_t end = s.find_first_not_of("0123456789", dot + 1);
-	return (end == std::string::npos ? s.length() : end) - dot - 1;
+	int precision = (end == std::string::npos ? s.length() : end) - dot - 1;
+
+	if (precision == 0)
+		return 1;
+
+	return precision;
 }
 
 // Printing functions
@@ -165,8 +169,15 @@ static void printInt(double value) {
 static void printFloat(double value, const std::string& literal) {
 	std::cout << std::left << std::setw(ScalarConverter::WIDTH) << "float: ";
 
-	if (std::isnan(value) || std::isinf(value)) {
-		std::cout << static_cast<float>(value) << "f" << std::endl;
+	if (std::isnan(value)) {
+		std::cout << "nanf" << std::endl;
+		return;
+	}
+	if (std::isinf(value)) {
+		if (value < 0)
+			std::cout << "-inff" << std::endl;
+		else
+			std::cout << "+inff" << std::endl;
 		return;
 	}
 
@@ -179,11 +190,22 @@ static void printFloat(double value, const std::string& literal) {
 static void printDouble(double value, const std::string& literal) {
 	std::cout << std::left << std::setw(ScalarConverter::WIDTH) << "double: ";
 
+	if (std::isnan(value)) {
+		std::cout << "nan" << std::endl;
+		return;
+	}
+	if (std::isinf(value)) {
+		if (value < 0)
+			std::cout << "-inf" << std::endl;
+		else
+			std::cout << "+inf" << std::endl;
+		return;
+	}
+
 	int precision = getPrecision(literal);
 	std::cout << std::fixed << std::setprecision(precision);
 
-	std::cout << static_cast<double>(value);
-	std::cout << std::endl;
+	std::cout << value << std::endl;
 }
 
 
@@ -196,11 +218,6 @@ void ScalarConverter::convert(const std::string &literal) {
     } else {
         char* end;
         value = strtod(literal.c_str(), &end);
-
-        if (*end != '\0' && !(*end == 'f' && *(end + 1) == '\0')) {
-            std::cout << "Invalid input" << std::endl;
-            return;
-        }
     }
 
     printChar(value);

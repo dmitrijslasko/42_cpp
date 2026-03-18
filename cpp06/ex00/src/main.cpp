@@ -35,12 +35,12 @@ int main(int argc, char **argv) {
 	printSeparator();
 
 	// type checks
+	printCheck("Is pseudo-float: ", ScalarConverter::isPseudoFloat(literal));
+	printCheck("Is pseudo-double: ", ScalarConverter::isPseudoDouble(literal));
 	printCheck("Is char: ", ScalarConverter::isChar(literal));
 	printCheck("Is int: ", ScalarConverter::isInt(literal));
 	printCheck("Is float: ", ScalarConverter::isFloat(literal));
 	printCheck("Is double: ", ScalarConverter::isDouble(literal));
-	printCheck("Is pseudo-float: ", ScalarConverter::isPseudoFloat(literal));
-	printCheck("Is pseudo-double: ", ScalarConverter::isPseudoDouble(literal));
 	printSeparator();
 
 	// if the literal is not valid for any type, print an error and exit
