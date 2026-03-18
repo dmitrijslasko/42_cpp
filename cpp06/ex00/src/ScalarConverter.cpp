@@ -2,10 +2,13 @@
 #include <iomanip>
 #include <limits>
 #include <cstdlib>
+#include <cmath>
 
 #include "ScalarConverter.hpp"
 
 // Type detection functions
+// Type detection = syntax + range validity
+
 bool ScalarConverter::isPseudoFloat(const std::string& s)
 {
 	return (s == "nanf" || s == "+inff" || s == "-inff");
@@ -17,23 +20,43 @@ bool ScalarConverter::isPseudoDouble(const std::string& s)
 }
 
 bool ScalarConverter::isChar(const std::string &s) {
-	return (s.length() == 1 && !isdigit(s[0]));
+	if (s.length() != 1)
+		return false;
+	if (!isdigit(s[0]))
+		return false;
+	return true;
 }
 
 bool ScalarConverter::isInt(const std::string &s) {
-	size_t i = 0;
-	if (s[i] == '-')
-		i++;
 
-	if (i == s.length())
+	if (s.empty())
+    	return false;
+
+	if (isdigit(s[0]) || (s[0] == '-' && s.length() > 1 && isdigit(s[1])))
 		return false;
-
-	while (i < s.length()) {
-		if (!isdigit(s[i]))
-			return false;
-		i++;
-	}
+	
 	return true;
+
+	// long value = std::strtol(s.c_str(), NULL, 10);
+	
+	// if (value < std::numeric_limits<int>::min() ||
+	// 	value > std::numeric_limits<int>::max() ||
+	// 	std::isnan(value) || std::isinf(value))
+	// 	return false;
+
+	// size_t i = 0;
+	// if (s[i] == '-')
+	// 	i++;
+
+	// if (i == s.length())
+	// 	return false;
+
+	// while (i < s.length()) {
+	// 	if (!isdigit(s[i]))
+	// 		return false;
+	// 	i++;
+	// }
+	// return true;
 }
 
 bool ScalarConverter::isFloat(const std::string &s) {
@@ -89,21 +112,17 @@ static void printChar(double value) {
 
 	if (value < std::numeric_limits<char>::min() ||
 		value > std::numeric_limits<char>::max() ||
-		ScalarConverter::isPseudoFloat(std::to_string(value)) || 
-		ScalarConverter::isPseudoDouble(std::to_string(value)))
+		std::isnan(value) || std::isinf(value))
 	{
 		std::cout << "impossible" << std::endl;
-		return ;
+		return;
 	}
 	else if (value < 32 || value == 127)
 	{
 		std::cout << "non displayable" << std::endl;
-		return ;
+		return;
 	}
-	std::cout << '\'';
-	std::cout << static_cast<char>(value);
-	std::cout << '\'';
-	std::cout << std::endl;
+	std::cout << '\'' << static_cast<char>(value) << '\'' << std::endl;
 }
 
 static void printInt(double value) {
@@ -111,28 +130,34 @@ static void printInt(double value) {
 
 	if (value < std::numeric_limits<int>::min() ||
 		value > std::numeric_limits<int>::max() ||
-		ScalarConverter::isPseudoFloat(std::to_string(value)) || 
-		ScalarConverter::isPseudoDouble(std::to_string(value)))
+		std::isnan(value) || std::isinf(value))
 	{
 		std::cout << "impossible" << std::endl;
-		return ;
+		return;
 	}
-	std::cout << static_cast<int>(value);
-	std::cout << std::endl;
+	std::cout << static_cast<int>(value) << std::endl;
 }
 
 static void printFloat(double value) {
 	std::cout << std::left << std::setw(ScalarConverter::WIDTH) << "float: ";
 
-	std::cout << std::fixed << std::setprecision(1);
-	std::cout << static_cast<float>(value) << "f";
-	std::cout << std::endl;
+	if (std::isnan(value) || std::isinf(value)) {
+		std::cout << static_cast<float>(value) << "f" << std::endl;
+		return;
+	}
+
+	if (value == static_cast<int>(value))
+		std::cout << std::fixed << std::setprecision(1);
+	else
+		std::cout << std::setprecision(6);
+
+	std::cout << static_cast<float>(value) << "f" << std::endl;
 }
 
 static void printDouble(double value) {
 	std::cout << std::left << std::setw(ScalarConverter::WIDTH) << "double: ";
 
-	std::cout << std::fixed << std::setprecision(1);
+	// std::cout << std::fixed << std::setprecision(1);
 	std::cout << static_cast<double>(value);
 	std::cout << std::endl;
 }
