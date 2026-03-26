@@ -238,14 +238,6 @@ static void printFloat(double value, const std::string& literal) {
 			value = strtod(literal.c_str(), &end);
 		}
 
-		if (errno == ERANGE) {
-			// Normalize to infinity (optional but clean)
-			if (value == HUGE_VAL)
-				value = std::numeric_limits<double>::infinity();
-			else if (value == -HUGE_VAL)
-				value = -std::numeric_limits<double>::infinity();
-		}
-
 		printChar(value);
 		printInt(value);
 		printFloat(value, literal);
