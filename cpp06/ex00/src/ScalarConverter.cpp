@@ -26,6 +26,7 @@
 	}
 
 	bool ScalarConverter::isInt(const std::string &s) {
+
 		if (s.empty())
 			return false;
 
@@ -137,7 +138,8 @@
 	static void printChar(double value) {
 
 		std::cout << std::left << std::setw(ScalarConverter::WIDTH) << "char: ";
-
+		
+		// if the value is out of char range, or if it's NaN or infinity, it's impossible to convert to char
 		if (value < std::numeric_limits<char>::min() ||
 			value > std::numeric_limits<char>::max() ||
 			std::isnan(value) || std::isinf(value))
@@ -150,12 +152,16 @@
 			std::cout << "Non displayable" << std::endl;
 			return;
 		}
+
+		// if we get here, the value is a valid displayable char
 		std::cout << '\'' << static_cast<char>(value) << '\'' << std::endl;
 	}
 
 	static void printInt(double value) {
+
 		std::cout << std::left << std::setw(ScalarConverter::WIDTH) << "int: ";
 
+		// if the value is out of int range, or if it's NaN or infinity, it's impossible to convert to int
 		if (value < std::numeric_limits<int>::min() ||
 			value > std::numeric_limits<int>::max() ||
 			std::isnan(value) || std::isinf(value))
@@ -163,6 +169,8 @@
 			std::cout << "impossible" << std::endl;
 			return;
 		}
+
+		// if we get here, the value is a valid int
 		std::cout << static_cast<int>(value) << std::endl;
 	}
 
@@ -228,6 +236,14 @@ static void printFloat(double value, const std::string& literal) {
 		} else {
 			char* end;
 			value = strtod(literal.c_str(), &end);
+		}
+
+		if (errno == ERANGE) {
+			// Normalize to infinity (optional but clean)
+			if (value == HUGE_VAL)
+				value = std::numeric_limits<double>::infinity();
+			else if (value == -HUGE_VAL)
+				value = -std::numeric_limits<double>::infinity();
 		}
 
 		printChar(value);
