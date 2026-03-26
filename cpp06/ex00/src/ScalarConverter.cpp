@@ -149,7 +149,7 @@
 		}
 		else if (value < 32 || value == 127)
 		{
-			std::cout << "Non displayable" << std::endl;
+			std::cout << "Non displayable character" << std::endl;
 			return;
 		}
 
@@ -227,19 +227,35 @@ static void printFloat(double value, const std::string& literal) {
 	}
 
 
-	void ScalarConverter::convert(const std::string &literal) {
+void ScalarConverter::convert(const std::string &literal) {
 
-		double value;
+    double value;
 
-		if (isChar(literal)) {
-			value = static_cast<double>(literal[0]);
-		} else {
-			char* end;
-			value = strtod(literal.c_str(), &end);
-		}
+    if (isPseudoFloat(literal) || isPseudoDouble(literal)) {
+        value = std::numeric_limits<double>::quiet_NaN();
 
-		printChar(value);
-		printInt(value);
-		printFloat(value, literal);
-		printDouble(value, literal);
-	}
+        if (literal[0] == '-')
+            value = -std::numeric_limits<double>::infinity();
+        else if (literal[0] == '+')
+            value = std::numeric_limits<double>::infinity();
+        else if (literal == "inf" || literal == "inff")
+            value = std::numeric_limits<double>::infinity();
+    }
+    else if (isChar(literal)) {
+        value = static_cast<double>(literal[0]);
+    }
+    else {
+        char* end;		// end tells you how much of the string was actually parsed as a number.
+        value = strtod(literal.c_str(), &end);
+
+        // 🔴 key fix
+        if (end == literal.c_str() || *end != '\0') {
+            value = std::numeric_limits<double>::quiet_NaN();
+        }
+    }
+
+    printChar(value);
+    printInt(value);
+    printFloat(value, literal);
+    printDouble(value, literal);
+}

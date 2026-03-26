@@ -43,18 +43,18 @@ int main(int argc, char **argv) {
 	printCheck("Is double: ", ScalarConverter::isDouble(literal));
 	printSeparator();
 
-	// if the literal is not valid for any type, print an error and exit
-	if (!ScalarConverter::isChar(literal) && 
-		!ScalarConverter::isInt(literal) && 
-		!ScalarConverter::isFloat(literal) && 
-		!ScalarConverter::isDouble(literal) &&
-	    !ScalarConverter::isPseudoFloat(literal) && 
-		!ScalarConverter::isPseudoDouble(literal))
-	{
-		std::cerr << "Invalid literal" << std::endl;
-		printSeparator();
-		return 1;
-	}
+	// // if the literal is not valid for any type, print an error and exit
+	// if (!ScalarConverter::isChar(literal) && 
+	// 	!ScalarConverter::isInt(literal) && 
+	// 	!ScalarConverter::isFloat(literal) && 
+	// 	!ScalarConverter::isDouble(literal) &&
+	//     !ScalarConverter::isPseudoFloat(literal) && 
+	// 	!ScalarConverter::isPseudoDouble(literal))
+	// {
+	// 	std::cerr << "Invalid literal" << std::endl;
+	// 	printSeparator();
+	// 	return 1;
+	// }
 
 	// conversion and printing
 	ScalarConverter::convert(literal);
