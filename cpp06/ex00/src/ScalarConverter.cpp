@@ -147,7 +147,7 @@
 			std::cout << "impossible" << std::endl;
 			return;
 		}
-		else if (value < 32 || value == 127)
+		else if (value < 32 || value > 126)
 		{
 			std::cout << "Non displayable character" << std::endl;
 			return;
