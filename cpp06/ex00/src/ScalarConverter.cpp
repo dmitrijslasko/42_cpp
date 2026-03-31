@@ -22,7 +22,13 @@
 	}
 
 	bool ScalarConverter::isChar(const std::string &s) {
-		return (s.length() == 1 && std::isprint(s[0]) && !std::isdigit(s[0]));
+		return (
+			s.length() == 1 &&
+			!std::isdigit(s[0]) &&
+			s[0] != '+' &&
+			s[0] != '-' &&
+			s[0] != '.'
+		);
 	}
 
 	bool ScalarConverter::isInt(const std::string &s) {
@@ -32,7 +38,7 @@
 
 		char *end;
 		errno = 0;
-		
+
 		// on error, strtol returns LONG_MAX or LONG_MIN and sets errno to ERANGE
 		long value = std::strtol(s.c_str(), &end, 10);
 
@@ -83,7 +89,8 @@
 			i++;
 		}
 
-		return hasDot && hasDigit;
+		//return hasDot && hasDigit;
+		return hasDigit;
 	}
 
 	bool ScalarConverter::isDouble(const std::string &s) {
@@ -138,7 +145,7 @@
 	static void printChar(double value) {
 
 		std::cout << std::left << std::setw(ScalarConverter::WIDTH) << "char: ";
-		
+
 		// if the value is out of char range, or if it's NaN or infinity, it's impossible to convert to char
 		if (value < std::numeric_limits<char>::min() ||
 			value > std::numeric_limits<char>::max() ||
@@ -231,27 +238,40 @@ void ScalarConverter::convert(const std::string &literal) {
 
     double value;
 
+    // 1. PSEUDO LITERALS
     if (isPseudoFloat(literal) || isPseudoDouble(literal)) {
-        value = std::numeric_limits<double>::quiet_NaN();
-
-        if (literal[0] == '-')
+        if (literal == "nan" || literal == "nanf")
+            value = std::numeric_limits<double>::quiet_NaN();
+        else if (literal[0] == '-')
             value = -std::numeric_limits<double>::infinity();
-        else if (literal[0] == '+')
-            value = std::numeric_limits<double>::infinity();
-        else if (literal == "inf" || literal == "inff")
+        else
             value = std::numeric_limits<double>::infinity();
     }
+
+    // 2. CHAR
     else if (isChar(literal)) {
         value = static_cast<double>(literal[0]);
     }
-    else {
-        char* end;		// end tells you how much of the string was actually parsed as a number.
-        value = strtod(literal.c_str(), &end);
 
-        // 🔴 key fix
-        if (end == literal.c_str() || *end != '\0') {
-            value = std::numeric_limits<double>::quiet_NaN();
-        }
+    // 3. FLOAT (strip 'f')
+    else if (isFloat(literal)) {
+        std::string trimmed = literal.substr(0, literal.length() - 1);
+        value = std::strtod(trimmed.c_str(), NULL);
+    }
+
+    // 4. DOUBLE
+    else if (isDouble(literal)) {
+        value = std::strtod(literal.c_str(), NULL);
+    }
+
+    // 5. INT
+    else if (isInt(literal)) {
+        value = static_cast<double>(std::atoi(literal.c_str()));
+    }
+
+    // 6. INVALID INPUT
+    else {
+        value = std::numeric_limits<double>::quiet_NaN();
     }
 
     printChar(value);
